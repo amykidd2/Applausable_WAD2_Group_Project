@@ -21,4 +21,5 @@ app_name = 'applausable'
 
 urlpatterns = [
     path('home/', views.home, name='home'),
+    path('home/artist/', views.artist, name='artist'),
 ]

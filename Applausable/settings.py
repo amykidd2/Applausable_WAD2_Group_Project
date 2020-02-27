@@ -29,6 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#TODO: add static directory and media directory
+
 
 # Application definition
 
