@@ -4,7 +4,7 @@ class User(models.Model):
     username = models.CharField(primary_key=True, max_length=20, unique=True)
     #TODO: should we add an email field?
     password = models.CharField(max_length=128)
-    profilePicture = models.ImageField(editable=True, null=True)
+    sprofilePicture = models.ImageField(editable=True, null=True)
     professional = models.BooleanField(default=False)
     #TODO: reviews 
     
