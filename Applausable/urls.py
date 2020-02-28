@@ -20,6 +20,7 @@ from rango import views
 app_name = 'applausable'
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('home/', views.home, name='home'),
     path('home/artist/', views.artist, name='artist'),
 ]

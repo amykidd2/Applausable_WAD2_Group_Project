@@ -2,8 +2,9 @@ from django.db import models
 
 class User(models.Model): 
     username = models.CharField(primary_key=True, max_length=20, unique=True)
+    #TODO: should we add an email field?
     password = models.CharField(max_length=128)
-    #TODO: profilePicture
+    profilePicture = models.ImageField(editable=True, null=True)
     professional = models.BooleanField(default=False)
     #TODO: reviews 
     
@@ -21,6 +22,19 @@ class Artist(models.Model):
     def __str__(self): 
         return self.artistID
 
+class Song(models.Model): 
+    songID = models.CharField(primary_key=True, max_length=20, unique=True)
+    title = models.CharField(max_length=128)
+    album = models.CharField(max_length=128)
+    artistName = models.CharField(max_length=128)
+    artistID = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    #TODO: reviews
+    overallScore = models.IntegerField(default=0)
+    linkToSong = models.URLField() 
+    
+    def __str__(self): 
+        return self.songID        
+
 class Review(models.Model): 
     reviewID = models.CharField(primary_key=True, max_length=20, unique=True)
     review = models.CharField(max_length=248)
@@ -33,15 +47,12 @@ class Review(models.Model):
     def __str__(self): 
         return self.reviewID
 
-class Song(models.Model): 
-    songID = models.CharField(primary_key=True, max_length=20, unique=True)
-    title = models.CharField(max_length=128)
-    album = models.CharField(max_length=128)
-    artistName = models.CharField(max_length=128)
+class Album(models.Model):
+    ablumID = models.CharField(primary_key=True, max_length=20, unique=True)
+    #TODO: songs
+    albumName = models.CharField(max_length=128)
     artistID = models.ForeignKey(Artist, on_delete=models.CASCADE)
-    #TODO: reviews
-    overallScore = models.IntegerField(default=0)
-    linkToSong = models.URLField() 
-    
+    ablumCover = models.ImageField(editable=True, null=True)
+
     def __str__(self): 
-        return self.songID       
+        return self.albumID
