@@ -1,72 +1,52 @@
-import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Applausable.settings')
-
-import django
-django.setup()
-from rango.models import UserProfile, Artist, Song, Review, Album
+import os 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Applausable.settings') 
+ 
+import django 
+django.setup() 
+from rango.models import Artist, Album
 
 def populate():
-    arts = [{
-        'id': 1000, 'name': 'The Beatles', 'genre': 'Rock', 
-        'albums': {'albums': beatles_albs}, 
-        'description': 'John, Paul, George and Ringo', 
-        'linkToSocialMedia': 'https://www.youtube.com/user/thebeatles'
-        }]
-
-    beatles_albs = [
-        {'id': 1010, 'songs': {'Here Comes The Sun': {'songs': here_comes_the_sun}},
-        'albumName': 'Abbey Road'}
-        {'id': 1020, 'songs': {'Let it be': {'songs': let_it_be}},
-        'albumName': 'Let It Be'}
-        #TODO: artistID and just now image is set as null
-    ]
-
-    abbey_road_songs = [{
-        'id': 1011, 'title' = 'Here Comes The Sun', 'album': 'Abbey Road', 
-        'artist': 'The Beatles', 'genre': 'Rock', 
-        'linkToSong': 'https://www.youtube.com/watch?v=bgiQD56eWDk'
-        #TODO: artistID and reviews. OverallScore set to 0
-
-    }]
-
-
-    here_comes_the_sun = [{
-        'id': 1011, 'title' = 'Here Comes The Sun', 'album': 'Abbey Road', 
-        'artist': 'The Beatles', 'genre': 'Rock', 
-        'linkToSong': 'https://www.youtube.com/watch?v=bgiQD56eWDk'
-        #TODO: artistID and reviews. OverallScore set to 0
-
-    }]
-
-    abbey_road = [
-        {'id': 1010, 'songs': {'Here Comes The Sun': {'songs': here_comes_the_sun}},
-        'albumName': 'Abbey Road'}
-        ]
-
-    the_beatles = [{
-        'id': 1000, 'name': 'The Beatles', 'genre': 'Rock', 
-        'albums': {'albums': abbey_road}, 
-        'description': 'John, Paul, George and Ringo', 
-        'linkToSocialMedia': 'https://www.youtube.com/user/thebeatles'
-        }]    
+    beatles_albs =[
+        {'albumID': 1010, 'albumName': 'Abbey Road'},
+        {'albumID': 1020, 'albumName': 'Let It Be'}
+    ]         #just now image is set as null
+     
+    oasis_albs = [
+        {'albumID': 2010, 'albumName': '(Whats the Story) Morning Glory?'},
+        {'albumID': 2020, 'albumName': 'Definetly Maybe'}
+    ]         #just now image is set as null
+     
+    arts = {
+        1000 : {'albs': beatles_albs, 'name': 'The Beatles', 'genre': 'rock', 'description': 'John, Paul, George and Ringo', 'linkToSocialMedia': 'https://www.youtube.com/user/thebeatles'}, 
+        2000 : {'albs': oasis_albs, 'name': 'Oasis', 'genre': 'rock', 'description': 'Liam, Noel, Paul, Paul and Tony', 'linkToSocialMedia': 'https://www.youtube.com/user/oasisinetofficial'}
+    }
+     
+    for arts, arts_data in arts.items():
+        a = add_artist(arts, arts_data['name'], arts_data['genre'], arts_data['description'], arts_data['linkToSocialMedia'])
+        for alb in arts_data['albs']:
+            add_album(a, alb['albumID'], alb['albumName'])
+             
+    for a in Artist.objects.all():
+        for alb in Album.objects.filter(artistID=a):
+            print(f'- {a}: {alb}')
 
 
-    users = [
-        {'userID': 54321, 'password': 12345,'professional': False},
-        {'userID': 12345, 'password': 54321, 'professional': True}
-        #TODO: add image
-        ]
+def add_album(arts, albumID, albumName, artistID):
+    alb = Album.objects.get_or_create(artistID=arts, albumID=albumID)[0]
+    alb.albumName=albumName
+    alb.artistID=artistID
+    alb.save()
+    return alb
 
-def add_artist(id, name, genre, albums, description, linkToSocialMedia):
-    a = Page.objects.get_or_create(id=id, albums=albums)[0]
-
-def add_user(userID, password, professional):
-    u = User.objects.get_or_create(userID=userID)[0]
-    u.password=password
-    u.professional=professional
-    u.save()
-    return u
+def add_artist(artistID, name, genre, description, linkToSocialMedia):
+    a = Artist.objects.get_or_create(name=name)[0]
+    a.artistId=artistID
+    a.genre=genre
+    a.description=description
+    a.linkToSocialMedia=linkToSocialMedia
+    a.save()
+    return a
 
 if __name__ == '__main__':
     print('Starting Rango population script...')
-    populate()
+    populate()    
