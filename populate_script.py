@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Applausable.settings')
 
 import django
 django.setup()
-from rango.models import User, Artist, Song, Review, Album
+from rango.models import UserProfile, Artist, Song, Review, Album
 
 def populate():
     arts = [{

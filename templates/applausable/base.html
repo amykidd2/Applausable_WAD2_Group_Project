@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<!-- #TODO: make template tags -->
+<!-- #TODO: make template tags but do this when make review forum-->
 
 <html>
     <head>
@@ -21,6 +21,13 @@
         <div>
             <ul>
                 <!--For some reason when regestering url don't need app_name ('applausable:home')-->
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'restricted' %}">Restricted Page</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
                     <li><a href="{% url 'artist' %}">Artist</a></li>
                     <li><a href="{% url 'home' %}">Home</a></li>
             </ul>

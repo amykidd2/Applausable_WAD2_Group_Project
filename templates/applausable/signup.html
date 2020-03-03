@@ -1,0 +1,24 @@
+{% extends 'applausable/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Sign up
+{% endblock %}
+
+{% block body_block %}
+<h1>Sign up to Applausable</h1>
+{% if registered %}
+<strong>thank you for registering!</strong>
+<a href="{% url 'home' %}">Return to the homepage.</a><br />
+{% else %}
+<strong>Sign up here!</strong>
+<!--Don't really know what the website thing does so might take it out here and in models-->
+<form id="user_form" method="post" action="{% url 'signup' %}" enctype="multipart/form-data">
+   
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    <input type="submit" name="submit" value="Register" />
+</form>
+{% endif %}
+{% endblock %}

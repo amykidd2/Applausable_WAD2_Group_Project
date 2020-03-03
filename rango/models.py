@@ -1,15 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class User(models.Model): 
-    username = models.CharField(primary_key=True, max_length=20, unique=True)
-    #TODO: should we add an email field?
-    password = models.CharField(max_length=128)
-    sprofilePicture = models.ImageField(editable=True, null=True)
-    professional = models.BooleanField(default=False)
-    #TODO: reviews 
-    
+#In book they have a seperate UserProfile which links to django's User model instead
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    website = models.URLField(blank=True)
+    picture = models.ImageField(upload_to='profile_images', blank=True, editable=True)  
+
     def __str__(self): 
-        return self.username
+        return self.user.username     
 
 class Artist(models.Model): 
     artistID = models.CharField(primary_key=True, max_length=20, unique=True)
@@ -35,6 +34,7 @@ class Song(models.Model):
     def __str__(self): 
         return self.songID        
 
+#I think this should be in the forms instead
 class Review(models.Model): 
     reviewID = models.CharField(primary_key=True, max_length=20, unique=True)
     review = models.CharField(max_length=248)
