@@ -1,14 +1,10 @@
-<!DOCTYPE html> 
-<html>
-    <head>
-        <title>Home</title>
-    </head>
+{% extends 'applausable/base.html' %}
+{% load staticfiles %}
 
-    <body>
-        <h1>Home.</h1>
-        <div>
-            <a href="/home/artist/">Artist</a>
-        </div>
-    </body>
+{% block title_block %}
+    Homepage
+{% endblock %}
 
-</html>
+{% block body_block %}
+<h1>Home.</h1> 
+{% endblock %}

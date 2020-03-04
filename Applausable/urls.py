@@ -23,4 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', views.home, name='home'),
     path('home/artist/', views.artist, name='artist'),
+    path('home/login/', views.login, name='login'),
+    path('home/signup/', views.signup, name='signup'),
+    # Made a restricted page just cause rango has one in the book just in case we want to use it
+    path('restricted/', views.restricted, name='restricted'),
+    path('logout/', views.logout, name='logout'),
 ]
