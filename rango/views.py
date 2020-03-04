@@ -8,14 +8,15 @@ from django.contrib.auth.decorators import login_required
 from rango.models import Artist
 
 def home(request):
-    return render(request, 'applausable/home.html')
-
-def artist(request):
+    #TODO: update query so with filter so it only shows top reviewed
     artist_list = Artist.objects.all()
 
     context_dict= {'artists': artist_list}
 
-    return render(request, 'applausable/artist.html', context=context_dict)
+    return render(request, 'applausable/home.html', context=context_dict)
+
+def artist(request):
+    return render(request, 'applausable/artist.html')
 
 def signup(request):
     registered = False

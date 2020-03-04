@@ -7,15 +7,4 @@
 
 {% block body_block %}
 <h1>Artist.</h1> 
-<div>
-    {% if artists %}
-        <ul>
-        {% for artist in artists %}
-            <li>{{ artist.artistName }}</li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <strong>There are no rated artists.</strong>
-    {% endif %}
-</div>
 {% endblock %}
