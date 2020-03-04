@@ -6,6 +6,8 @@ django.setup()
 from rango.models import Artist, Album
 
 def populate():
+
+    #TODO: add songs the albs list and update all of the populate
     beatles_albs =[
         {'albumID': 1010, 'albumName': 'Abbey Road'},
         {'albumID': 1020, 'albumName': 'Let It Be'}

@@ -5,12 +5,17 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from rango.models import Artist
 
 def home(request):
     return render(request, 'applausable/home.html')
 
 def artist(request):
-    return render(request, 'applausable/artist.html')
+    artist_list = Artist.objects.all()
+
+    context_dict= {'artists': artist_list}
+
+    return render(request, 'applausable/artist.html', context=context_dict)
 
 def signup(request):
     registered = False
