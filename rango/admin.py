@@ -9,5 +9,6 @@ class AlbumAdmin(admin.ModelAdmin):
 admin.site.register(Album, AlbumAdmin)
 
 class ArtistAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('artistName',)}
     list_display = ('artistID', 'artistName', 'genre', 'description', 'LinkToSocialMedia')
 admin.site.register(Artist, ArtistAdmin)

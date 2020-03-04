@@ -7,4 +7,25 @@
 
 {% block body_block %}
 <h1>Artist.</h1> 
+<div>
+    <h2>Top Rated Artists:</h2>
+    {% if artists %}
+        <ul>
+        {% for artist in artists %}
+            <li>{{ artist.artistName }}</li>
+            {% if albums %}
+            <ul>
+                {% for album in albums %}
+                    <li>{{ album.albumName }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <strong>No albums for this artist.</strong>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% else %}
+        <strong>There are no rated artists.</strong>
+    {% endif %}
+</div>
 {% endblock %}

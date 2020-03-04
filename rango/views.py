@@ -5,18 +5,36 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rango.models import Artist
+from rango.models import Artist, Album
 
 def home(request):
+    return render(request, 'applausable/home.html')
+
+def artist(request):
     #TODO: update query so with filter so it only shows top reviewed
     artist_list = Artist.objects.all()
 
     context_dict= {'artists': artist_list}
+    return render(request, 'applausable/artist.html', context=context_dict)
 
-    return render(request, 'applausable/home.html', context=context_dict)
+def album(request):
+    return render(request, 'applausable/album.html')    
 
-def artist(request):
-    return render(request, 'applausable/artist.html')
+def show_artist(request, artist_name_slug):
+    context_dict = {}
+
+    try:
+        artist = Artist.objects.get(slug=artist_name_slug)
+        albums = Album.objects.filter(artistID=artist) 
+
+        context_dict['albums'] = album
+        context_dict['artist'] = artist 
+
+    except Category.DoesNotExist:
+        context_dict['artist'] = None
+        context_dict['albums'] = None
+
+    return render(request, 'applausable/artist.html', context=context_dict)
 
 def signup(request):
     registered = False
