@@ -1,23 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import User    
 
-class Artist(models.Model): 
-    artistID = models.CharField(primary_key=True, max_length=20, unique=True)
-    name = models.CharField(max_length=128)
-    genre = models.CharField(max_length=128)
-    description = models.CharField(max_length=248)
-    LinkToSocialMedia = models.URLField() 
+class Category(models.Model):
+    name_max_length = 128
+    name = models.CharField(max_length=name_max_length, unique=True)
+    views = models.IntegerField(default=0)
+    likes = models.IntegerField(default=0)
 
-    def __str__(self): 
-        return self.artistID
+    def __str__(self):
+        return self.name
 
-class Album(models.Model):
-    artistID = models.ForeignKey(Artist, on_delete=models.CASCADE)
-    ablumID = models.CharField(primary_key=True, max_length=20, unique=True)
-    albumName = models.CharField(max_length=128)
+class Page(models.Model):
+    page_max_length = 128
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    title = models.CharField(max_length=page_max_length) 
+    url = models.URLField() 
+    views = models.IntegerField(default=0)
 
-    def __str__(self): 
-        return self.albumID
+    def __str__(self):
+        return self.title 
 
 #In book they have a seperate UserProfile which links to django's User model instead
 class UserProfile(models.Model):

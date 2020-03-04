@@ -1,6 +1,6 @@
 from django.contrib import admin
-from rango.models import UserProfile, Artist, Album
+from rango.models import UserProfile, Category, Page
 
 admin.site.register(UserProfile) 
-admin.site.register(Artist)
-admin.site.register(Album)
+admin.site.register(Category)
+admin.site.register(Page)
