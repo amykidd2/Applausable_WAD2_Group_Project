@@ -29,6 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = 'applausable:login'
+
 #TODO: add static directory and media directory
 
 
