@@ -6,3 +6,6 @@ def home(request):
 
 def artist(request):
     return render(request, 'applausable/artist.html')
+
+def signUp(request):
+    return render(request, 'applausable/SignUp.html')

@@ -16,10 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rango import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'applausable'
 
 urlpatterns = [
     path('home/', views.home, name='home'),
     path('home/artist/', views.artist, name='artist'),
-]
+    path('home/signUp/', views.artist, name='signUp'),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
