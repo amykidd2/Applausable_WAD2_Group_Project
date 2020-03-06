@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rango import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'applausable'
 
@@ -29,4 +31,4 @@ urlpatterns = [
     # Made a restricted page just cause rango has one in the book just in case we want to use it
     path('restricted/', views.restricted, name='restricted'),
     path('logout/', views.logout, name='logout'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

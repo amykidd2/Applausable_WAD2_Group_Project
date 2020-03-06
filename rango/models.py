@@ -32,4 +32,4 @@ class UserProfile(models.Model):
     picture = models.ImageField(upload_to='profile_images', blank=True, editable=True)  
 
     def __str__(self): 
-        return self.user.username         
+        return self.user.username
