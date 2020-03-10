@@ -51,7 +51,7 @@ def add_artist(request):
         else:
             print(form.errors)
 
-    return render(request, 'applausable/add_artist.html', {'form': form})
+    return render(request, 'applausable/add_artist.html', context = {'form': form})
 
 def signup(request):
     registered = False
@@ -94,7 +94,7 @@ def login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect(reverse('rango:index')) #TODO: change 
+                return redirect(reverse('applausable: home')) 
             else:
                 return HttpResponse("Your Rango account is disabled.")
         else:

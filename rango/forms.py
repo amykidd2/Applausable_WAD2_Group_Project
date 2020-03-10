@@ -8,11 +8,11 @@ class ArtistForm(forms.ModelForm):
     genre = forms.CharField(max_length=128, help_text='Enter genre.')
     description = forms.CharField(max_length=248, help_text='Enter your artist description.')
     LinkToSocialMedia = forms.URLField(help_text='Enter your social media link.')
-    slug = forms.SlugField(widget=forms.HiddenInput(), required=False)
+    slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Artist
-        fields = ('artistName', )
+        fields = ('artistName', 'genre', 'description', 'LinkToSocialMedia' )
         #when doing album
         #exclude = ('artistID')
 

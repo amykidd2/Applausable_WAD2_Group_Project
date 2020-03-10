@@ -1,14 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
+import uuid
 
 class Artist(models.Model): 
     artistID = models.IntegerField(primary_key=True, unique=True)
     artistName = models.CharField(max_length=128, default='Artist')
     genre = models.CharField(max_length=128, default='Genre')
     description = models.CharField(max_length=248, default='Description')
-    LinkToSocialMedia = models.URLField(default='Link')
-    slug = models.SlugField(unique=True)
+    LinkToSocialMedia = models.URLField(default='Link') #sorry I made it a capital L but now I've done too much to change it back
+    slug = models.SlugField(unique=True, )
+    slug = models.SlugField(unique=True, default=uuid.uuid1)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.artistName)
@@ -33,6 +35,7 @@ class Song(models.Model):
     artistID = models.ForeignKey(Artist, on_delete=models.CASCADE)
     overallScore = models.IntegerField(default=0)
     linkToSong = models.URLField() 
+    #should we have a track number? Like the number on the album?
 
     def str(self): 
         return self.songID
