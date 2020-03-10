@@ -3,6 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Applausable.settings')
  
 import django 
 django.setup() 
+<<<<<<< HEAD
 from rango.models import Artist, Album
 
 def populate():
