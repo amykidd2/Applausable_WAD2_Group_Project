@@ -25,6 +25,20 @@ class Album(models.Model):
     def __str__(self): 
         return self.albumID
 
+class Song(models.Model): 
+    songID = models.IntegerField(primary_key=True,  unique=True)
+    title = models.CharField(max_length=128, default='Title')
+    albumID = models.ForeignKey(Album, on_delete=models.CASCADE)
+    artistName = models.CharField(max_length=128, default='ArtistName')
+    artistID = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    overallScore = models.IntegerField(default=0)
+    linkToSong = models.URLField() 
+
+    def str(self): 
+        return self.songID
+
+
+
 #In book they have a seperate UserProfile which links to django's User model instead
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

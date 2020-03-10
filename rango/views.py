@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from rango.forms import UserForm, UserProfileForm
+from rango.forms import UserForm, UserProfileForm, ArtistForm
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
@@ -13,8 +13,10 @@ def home(request):
 def artist(request):
     #TODO: update query so with filter so it only shows top reviewed
     artist_list = Artist.objects.all()
-
-    context_dict= {'artists': artist_list}
+    album_list = Album.objects.all()
+    context_dict = {}
+    context_dict['artists'] = artist_list
+    context_dict['albums'] = album_list
     return render(request, 'applausable/artist.html', context=context_dict)
 
 def album(request):
@@ -35,6 +37,21 @@ def show_artist(request, artist_name_slug):
         context_dict['albums'] = None
 
     return render(request, 'applausable/artist.html', context=context_dict)
+
+def add_artist(request):
+    form = ArtistForm()
+    
+    if request.method == 'POST': 
+        form = ArtistForm(request.POST)
+        
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('/artist/')
+        
+        else:
+            print(form.errors)
+
+    return render(request, 'applausable/add_artist.html', {'form': form})
 
 def signup(request):
     registered = False
@@ -77,7 +94,7 @@ def login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect(reverse('rango:index'))
+                return redirect(reverse('rango:index')) #TODO: change 
             else:
                 return HttpResponse("Your Rango account is disabled.")
         else:
