@@ -13,8 +13,10 @@ def home(request):
 def artist(request):
     #TODO: update query so with filter so it only shows top reviewed
     artist_list = Artist.objects.all()
-
-    context_dict= {'artists': artist_list}
+    album_list = Album.objects.all()
+    context_dict = {}
+    context_dict['artists'] = artist_list
+    context_dict['albums'] = album_list
     return render(request, 'applausable/artist.html', context=context_dict)
 
 def album(request):

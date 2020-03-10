@@ -9,21 +9,24 @@
 <h1>Artist.</h1> 
 <div>
     <h2>Top Rated Artists:</h2>
+    {% for album in albums %}
+        {{ album.albumName}}
+    {% endfor %}
     {% if artists %}
         <ul>
         {% for artist in artists %}
             <li>{{ artist.artistName }}</li>
-            {% if albums %}
             <ul>
+            {% if albums %}
                 {% for album in albums %}
-                    <li>{{ album.albumName }}</a></li>
+                    {% ifequal artist.artistName album.artistID.artistName %}
+                        <li>{{ album.albumName }}</li>
+                    {% endifequal %}
                 {% endfor %}
-            </ul>
-            {% else %}
-                <strong>No albums for this artist.</strong>
             {% endif %}
+            </ul>
         {% endfor %}
-        </ul>
+        </ul>    
     {% else %}
         <strong>There are no rated artists.</strong>
     {% endif %}
