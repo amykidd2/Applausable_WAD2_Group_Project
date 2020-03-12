@@ -5,10 +5,13 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rango.models import Artist, Album
+from rango.models import Artist, Album, Song
 
 def home(request):
-    return render(request, 'applausable/home.html')
+    artist_list = Artist.objects.all()
+    context_dict = {}
+    context_dict['artists'] = artist_list
+    return render(request, 'applausable/home.html', context = context_dict)
 
 def artist(request):
     #TODO: update query so with filter so it only shows top reviewed
@@ -28,15 +31,16 @@ def show_artist(request, artist_name_slug):
     try:
         artist = Artist.objects.get(slug=artist_name_slug)
         albums = Album.objects.filter(artistID=artist) 
-
-        context_dict['albums'] = album
+        songs = Song.objects.filter(artistID= artist)
+        context_dict['albums'] = albums
         context_dict['artist'] = artist 
+        context_dict['songs'] = songs
 
     except Category.DoesNotExist:
         context_dict['artist'] = None
         context_dict['albums'] = None
 
-    return render(request, 'applausable/artist.html', context=context_dict)
+    return render(request, 'applausable/specificArtist.html', context=context_dict)
 
 def add_artist(request):
     form = ArtistForm()

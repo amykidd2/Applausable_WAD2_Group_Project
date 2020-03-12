@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', views.home, name='home'),
     path('home/artist/', views.artist, name='artist'),
-    path('home/artist//<slug:artist_name_slug>/', views.show_artist, name='show_artist'),
+    path('home/specificArtist/<slug:artist_name_slug>/', views.show_artist, name='show_artist'),
     path('add_artist/', views.add_artist, name='add_artist'),
     path('home/login/', views.login, name='login'),
     path('home/signup/', views.signup, name='signup'),

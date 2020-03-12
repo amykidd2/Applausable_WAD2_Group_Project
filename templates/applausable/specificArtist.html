@@ -1,0 +1,37 @@
+﻿{% extends 'applausable/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Artist
+{% endblock %}
+
+{% block body_block %}
+{% if artist %}
+    <h1>{{ artist.artistName }}</h1>
+    <div>
+        <h2> Albums: </h2>
+        <ul>
+        {% if albums %}
+                {% for album in albums %}
+                    {% ifequal artist.artistName album.artistID.artistName %}
+            
+                        <li>{{ album.albumName }}</li>
+                        <ul>
+                            {% for song in songs %}
+                                {% ifequal album.albumName song.albumID.albumName %}
+                                <li>{{ song.title }}</li>
+                                {% endifequal %}
+                            {% endfor %}
+                        </ul>
+                    {% endifequal %}
+                {% endfor %}
+
+            </ul>
+        {% else %}
+        <strong>This artist has no albums.</strong>
+        {% endif %}
+    </div>
+{% else %}
+<h1>No artist found</h1>
+{% endif %}
+{% endblock %}

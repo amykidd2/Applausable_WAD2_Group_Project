@@ -4,7 +4,14 @@
 {% block title_block %}
     Homepage
 {% endblock %}
+<ul>
 
 {% block body_block %}
-<h1>Home.</h1> 
+    <h1>Home.</h1> 
+{% for artist in artists %}
+
+    <li><a href="{% url 'show_artist' artist.slug %}">{{ artist.artistName }}</a></li>
+{% endfor %}
+</ul>
+
 {% endblock %}
