@@ -3,16 +3,11 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Applausable.settings')
  
 import django 
 django.setup() 
-<<<<<<< HEAD
-<<<<<<< HEAD
-from rango.models import Artist, Album
-=======
+
 from rango.models import Artist, Album, Song
->>>>>>> b4b500bc9cfa6c8a75c25efe48fb38c0391b29c1
+
 
 def populate():
-
-    #TODO: add songs the albs list and update all of the populate
 
     abbeyRoad_songs = [
         {'songID': 1011, 'title': 'Come Together', 'albumID':1010,'artistName':'The Beatles', 'artistID': 1000, 'linkToSong':'https://www.youtube.com/watch?v=45cYwDMibGo'}
