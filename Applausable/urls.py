@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 app_name = 'applausable'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('home/', views.home, name='home'),
     path('home/artist/', views.artist, name='artist'),
     path('home/specificArtist/<slug:artist_name_slug>/', views.show_artist, name='show_artist'),
