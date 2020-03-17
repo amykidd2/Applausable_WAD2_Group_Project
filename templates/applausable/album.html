@@ -15,7 +15,8 @@
         {% for song in songs %}
         {% ifequal album.albumName song.albumID.albumName %}
 
-        <li>{{ song.title }}</li>
+
+        <li><a href="{% url 'show_song' song.slug %}">{{ song.title }}</a></li>
         {% endifequal %}
         {% endfor %}
 
@@ -24,7 +25,10 @@
     <strong>This album has no songs.</strong>
     {% endif %}
 </div>
+<a href="{% url 'add_song' album.slug %}">Add Song</a>
 {% else %}
+
+<br />
 <h1>No album found</h1>
 {% endif %}
 {% endblock %}

@@ -1,0 +1,17 @@
+﻿{% extends 'applausable/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Song
+{% endblock %}
+
+{% block body_block %}
+{% if song %}
+<h1>{{ song.title }}</h1>
+From:
+<a href="{% url 'show_album' album.slug %}">{{ album.albumName }}</a>
+{% else %}
+<br />
+<h1>No song found</h1>
+{% endif %}
+{% endblock %}

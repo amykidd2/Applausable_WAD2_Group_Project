@@ -40,6 +40,11 @@ class Song(models.Model):
     artistID = models.ForeignKey(Artist, on_delete=models.CASCADE)
     overallScore = models.IntegerField(default=0)
     linkToSong = models.URLField() 
+    slug = models.SlugField(unique=True, default=uuid.uuid1)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title + self.albumID.albumName)
+        super(Song, self).save(*args, **kwargs)
     #should we have a track number? Like the number on the album?
 
     def str(self): 

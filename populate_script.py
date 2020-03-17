@@ -3,17 +3,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Applausable.settings')
  
 import django 
 django.setup() 
-<<<<<<< HEAD
-#<<<<<<< HEAD
-#<<<<<<< HEAD
-from rango.models import Artist, Album
-#=======
-from rango.models import Artist, Album, Song
-#>>>>>>> b4b500bc9cfa6c8a75c25efe48fb38c0391b29c1
-=======
 
 from rango.models import Artist, Album, Song
->>>>>>> c5c176bd4e0320f90c12952c2278f781fc27b0ca
+#>>>>>>> c5c176bd4e0320f90c12952c2278f781fc27b0ca
 
 
 def populate():

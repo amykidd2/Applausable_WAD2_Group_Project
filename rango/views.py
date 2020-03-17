@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from rango.forms import UserForm, UserProfileForm, ArtistForm, AlbumForm
+from rango.forms import UserForm, UserProfileForm, ArtistForm, AlbumForm, SongForm
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
@@ -57,6 +57,23 @@ def show_album(request, album_name_slug):
 
     return render(request, 'applausable/album.html', context=context_dict)
 
+
+def show_song(request, song_name_slug):
+    context_dict = {}
+
+    try:
+        song = Song.objects.get(slug= song_name_slug)
+        album = song.albumID
+        
+        context_dict['album'] = album
+        context_dict['song'] = song
+
+    except Category.DoesNotExist:
+        context_dict['album'] = None
+        context_dict['song'] = None
+
+    return render(request, 'applausable/song.html', context=context_dict)
+
 def add_artist(request):
     form = ArtistForm()
     
@@ -100,6 +117,36 @@ def add_album(request, artist_name_slug):
             print(form.errors)
     context_dict = {'form': form, 'artist': artist}
     return render(request, 'applausable/add_album.html', context=context_dict)
+
+def add_song(request, album_name_slug):
+    try:
+        album = Album.objects.get(slug=album_name_slug)
+        mostRecentSong = Song.objects.order_by('-songID')[:1]
+        previousSong = Song.objects.get(songID=mostRecentSong)
+    except Album.DoesNotExist:
+        album = None
+        # You cannot add a page to a Category that does not exist...
+    if album is None:
+        return redirect('/home/')
+
+    form = SongForm()
+
+    if request.method == 'POST':
+        form = SongForm(request.POST)
+        if form.is_valid():
+            if album:
+                song = form.save(commit=False)
+                song.songID = previousSong.songID + 1
+                song.artistID = album.artistID
+                song.albumID = album
+                song.save()
+                return redirect(reverse('show_album',
+                kwargs={'album_name_slug':
+                album_name_slug}))
+        else:
+            print(form.errors)
+    context_dict = {'form': form, 'album': album}
+    return render(request, 'applausable/add_song.html', context=context_dict)
 
 
 def signup(request):
