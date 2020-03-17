@@ -4,7 +4,7 @@ from rango.models import UserProfile, Artist, Album, Song
 admin.site.register(UserProfile) 
 #Apparently can't display the forgien key 'artistID'
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ('albumID', 'albumName')
+    list_display = ('albumID', 'albumName','slug')
 admin.site.register(Album, AlbumAdmin)
 
 class SongAdmin(admin.ModelAdmin):

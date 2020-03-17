@@ -9,7 +9,7 @@ class Artist(models.Model):
     genre = models.CharField(max_length=128, default='Genre')
     description = models.CharField(max_length=248, default='Description')
     LinkToSocialMedia = models.URLField(default='Link') #sorry I made it a capital L but now I've done too much to change it back
-    slug = models.SlugField(unique=True, )
+    #slug = models.SlugField(unique=True, )
     slug = models.SlugField(unique=True, default=uuid.uuid1)
 
     def save(self, *args, **kwargs):
@@ -23,6 +23,11 @@ class Album(models.Model):
     albumID = models.IntegerField(primary_key=True, unique=True)
     albumName = models.CharField(max_length=128)
     artistID = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    slug = models.SlugField(unique=True, default=uuid.uuid1)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.albumName + self.artistID.artistName)
+        super(Album, self).save(*args, **kwargs)
 
     def __str__(self): 
         return self.albumID
