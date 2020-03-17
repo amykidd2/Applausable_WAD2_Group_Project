@@ -6,23 +6,6 @@
 {% endblock %}
 
 {% block body_block %}
-<<<<<<< HEAD
-    <h1>Add an Artist</h1>
-        <div>
-            <form id="artist_form" method="post" action="/add_artist/">
-                {% csrf_token %}
-                {% for hidden in form.hidden_fields %}
-                    {{ hidden }}
-                {% endfor %}
-                {% for field in form.visible_fields %}
-                    {{ field.errors }}
-                    {{ field.help_text }}
-                    {{ field }}
-                {% endfor %}
-                <input type="submit" name="submit" value="Create Artist" />
-            </form>
-        </div>
-=======
 <div class="jumbotron p-4">
     <div class="container">
         <h1 class="jumbotron-heading">Add an Artist</h1>
@@ -50,5 +33,4 @@
         </form>
     </div>
 </div>
->>>>>>> c5c176bd4e0320f90c12952c2278f781fc27b0ca
 {% endblock %}

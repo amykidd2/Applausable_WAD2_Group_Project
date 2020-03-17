@@ -14,8 +14,6 @@ class ArtistForm(forms.ModelForm):
         model = Artist
         
         fields = ('artistName', 'genre', 'description', 'LinkToSocialMedia' )
-        #when doing album
-        #exclude = ('artistID')
 
 class AlbumForm(forms.ModelForm):
     #albumID = forms.IntegerField(widget=forms.HiddenInput(), initial=0000) #this doesnt work for some reason it just makes it 0 rather than increasing it.
