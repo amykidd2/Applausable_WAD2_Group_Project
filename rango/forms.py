@@ -39,7 +39,7 @@ class SongForm(forms.ModelForm):
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
     artistName = forms.CharField(max_length=128, help_text = 'Enter the name of the artist')
     overallScore = forms.IntegerField(widget=forms.HiddenInput(), initial=0000)
-    linkToSong = forms.URLField(help_text='Enter youtube link to song')
+    linkToSong = forms.CharField(help_text='Enter youtube link to song')
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Song

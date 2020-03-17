@@ -55,6 +55,7 @@ def add_song(songID, title, alb, a, linkToSong, artistName, overallscore=0):
     song.title=title
     song.overallScore=overallscore
     song.artistName = artistName
+    song.linkToSong = linkToSong
     song.save()
     return song
 

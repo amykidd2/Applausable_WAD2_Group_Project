@@ -64,9 +64,9 @@ def show_song(request, song_name_slug):
     try:
         song = Song.objects.get(slug= song_name_slug)
         album = song.albumID
-        
         context_dict['album'] = album
         context_dict['song'] = song
+        context_dict['link'] = song.linkToSong
 
     except Category.DoesNotExist:
         context_dict['album'] = None

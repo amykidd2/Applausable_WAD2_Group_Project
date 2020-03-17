@@ -39,7 +39,7 @@ class Song(models.Model):
     artistName = models.CharField(max_length=128, default='ArtistName')
     artistID = models.ForeignKey(Artist, on_delete=models.CASCADE)
     overallScore = models.IntegerField(default=0)
-    linkToSong = models.URLField() 
+    linkToSong = models.CharField(max_length=248, default = 'link') 
     slug = models.SlugField(unique=True, default=uuid.uuid1)
 
     def save(self, *args, **kwargs):
