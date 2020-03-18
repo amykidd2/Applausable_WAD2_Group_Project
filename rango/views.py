@@ -83,7 +83,7 @@ def add_artist(request):
         
         if form.is_valid():
             form.save(commit=True)
-            return redirect('/home/')
+            return redirect('/')
         
         else:
             print(form.errors)
@@ -99,7 +99,7 @@ def add_album(request, artist_name_slug):
         artist = None
         # You cannot add a page to a Category that does not exist...
     if artist is None:
-        return redirect('/home/')
+        return redirect('/')
 
     form = AlbumForm()
 
@@ -111,7 +111,7 @@ def add_album(request, artist_name_slug):
                 album.artistID = artist 
                 album.albumID = previousAlbum.albumID + 1
                 album.save()
-                return redirect(reverse('show_artist',
+                return redirect(reverse('applausable:show_artist',
                 kwargs={'artist_name_slug':
                 artist_name_slug}))
         else:
@@ -128,7 +128,7 @@ def add_song(request, album_name_slug):
         album = None
         # You cannot add a page to a Category that does not exist...
     if album is None:
-        return redirect('/home/')
+        return redirect('/')
 
     form = SongForm()
 
@@ -141,7 +141,7 @@ def add_song(request, album_name_slug):
                 song.artistID = album.artistID
                 song.albumID = album
                 song.save()
-                return redirect(reverse('show_album',
+                return redirect(reverse('applausable:show_album',
                 kwargs={'album_name_slug':
                 album_name_slug}))
         else:
