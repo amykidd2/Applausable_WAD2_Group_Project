@@ -16,7 +16,7 @@
             {% ifequal artist.artistName album.artistID.artistName %}
 
 
-            <li><a href="{% url 'show_album' album.slug %}">{{ album.albumName }}</a></li>
+            <li><a href="{% url 'applausable:show_album' album.slug %}">{{ album.albumName }}</a></li>
             <ul>
                 {% for song in songs %}
                 {% ifequal album.albumName song.albumID.albumName %}
@@ -31,7 +31,7 @@
         {% else %}
         <strong>This artist has no albums.</strong>
         {% endif %}
-        <a href="{% url 'add_album' artist.slug %}">Add Album</a><br />
+        <a href="{% url 'applausable:add_album' artist.slug %}">Add Album</a><br />
     </div>
 {% else %}
 <h1>No artist found</h1>

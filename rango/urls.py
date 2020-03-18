@@ -1,11 +1,11 @@
 from django.urls import path
+from django.conf.urls import url
 from rango import views
 
 app_name = 'applausable'
 
 urlpatterns = [
-    path('home/', views.home, name='home'),
-    path('home/artist/', views.artist, name='artist'),
+    path(r'home/artist/', views.artist, name='artist'),
     path('home/specificArtist/<slug:artist_name_slug>/', views.show_artist, name='show_artist'),
     path('home/album/<slug:album_name_slug>/', views.show_album, name='show_album'),
     path('home/song/<slug:song_name_slug>/', views.show_song, name='show_song'),

@@ -14,7 +14,7 @@ Homepage
             {% if user.is_authenticated %} 
                 Welcome {{ user.username }}! 
             {% else %} 
-            <a href="{% url 'signup' %}">Sign Up for Applausable</a>
+            <a href="{% url 'applausable:signup' %}">Sign Up for Applausable</a>
             {% endif %}
         </h4> 
         <strong>{{ boldmessage }}</strong> 
@@ -28,7 +28,7 @@ Homepage
                             {% if artists %}
                                 {% for artist in artists %}
                                     <li  class="nav-item">
-                                        <a class="nav-link active" href="{% url 'show_artist' artist.slug %}">
+                                        <a class="nav-link active" href="{% url 'applausable:show_artist' artist.slug %}">
                                             {{ artist.artistName }}
                                         </a>
                                     </li>

@@ -17,7 +17,7 @@
 
 <div class="container">
     <div class="row">
-        <form role="form" id="album_form" method="post" action="{% url 'add_album' artist.slug  %}">
+        <form role="form" id="album_form" method="post" action="{% url 'applausable:add_album' artist.slug  %}">
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
                 {{ hidden }}

@@ -9,7 +9,7 @@
 {% if song %}
 <h1>{{ song.title }}</h1>
 From:
-<a href="{% url 'show_album' album.slug %}">{{ album.albumName }}</a>
+<a href="{% url 'applausable:show_album' album.slug %}">{{ album.albumName }}</a>
 <div id="player"></div>
 <br />
 <script id="searcher" link={{link}} >
