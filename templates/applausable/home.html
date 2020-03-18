@@ -10,48 +10,33 @@ Homepage
 
 <div class="jumbotron jumbotron-fluid p-4"> 
     <div class="container"> 
-        <h1 class="jumbotron-heading">Home.</h1> 
-        
-            <div class="container"> 
-                <h4 class="h4"> 
-                    {% if user.is_authenticated %} 
-                        Welcome {{ user.username }}! 
-                    {% else %} 
-                    <a href="{% url 'signup' %}">Sign Up for Applausable</a>
-                    {% endif %}
-                </h4> 
-                <strong>{{ boldmessage }}</strong> 
-            </div> 
+        <h4 class="jumbotron-heading"> 
+            {% if user.is_authenticated %} 
+                Welcome {{ user.username }}! 
+            {% else %} 
+            <a href="{% url 'signup' %}">Sign Up for Applausable</a>
+            {% endif %}
+        </h4> 
+        <strong>{{ boldmessage }}</strong> 
 
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
                     <div class="card mb-6">
                         <div class="card-body">
-        
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card mb-6">
-                        <div class="card-body">
-                        {% if artists %}
-                            {% for artist in artists %}
-                                <li  class="nav-item">
-                                    <a class="nav-link active" href="{% url 'show_artist' artist.slug %}">
-                                        {{ artist.artistName }}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        {% else %}
-                            <li class="nav-item">There are no artists present.</li>
-                        {% endif %} 
-                            </ul>
+                            <div class='container'>
+                            {% if artists %}
+                                {% for artist in artists %}
+                                    <li  class="nav-item">
+                                        <a class="nav-link active" href="{% url 'show_artist' artist.slug %}">
+                                            {{ artist.artistName }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                <li class="nav-item">There are no artists present.</li>
+                            {% endif %} 
+                            </div>
                         </div>
                     </div>
                 </div>

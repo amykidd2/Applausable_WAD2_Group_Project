@@ -38,7 +38,6 @@ class Song(models.Model):
     albumID = models.ForeignKey(Album, on_delete=models.CASCADE)
     artistName = models.CharField(max_length=128, default='ArtistName')
     artistID = models.ForeignKey(Artist, on_delete=models.CASCADE)
-    overallScore = models.IntegerField(default=0)
     linkToSong = models.CharField(max_length=248, default = 'link') 
     slug = models.SlugField(unique=True, default=uuid.uuid1)
 
@@ -50,7 +49,15 @@ class Song(models.Model):
     def str(self): 
         return self.songID
 
+class Review(models.Model): 
+    reviewID = models.IntegerField(primary_key=True, unique=True)
+    review = models.CharField(max_length=248)
+    #user = models.ForeignKey(User, on_delete=models.CASCADE) implement later
+    songID = models.ForeignKey(Song, on_delete=models.CASCADE)
+    score = models.IntegerField(default=0)
 
+    def __str__(self): 
+        return self.reviewID
 
 #In book they have a seperate UserProfile which links to django's User model instead
 class UserProfile(models.Model):
