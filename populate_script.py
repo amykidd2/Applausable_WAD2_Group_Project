@@ -56,9 +56,9 @@ def populate():
         for album in arts_data['albs']:
             alb = add_album(a, album['albumID'], album['albumName'])
             for song in album['songs']:
-                add_song(song['songID'], song['title'], alb, a, song['linkToSong'], song['artistName'])
+                s = add_song(song['songID'], song['title'], alb, a, song['linkToSong'], song['artistName'])
                 for r in song['reviews']:
-                    add_review(r['reviewID'], r['review'], song, r['score'])
+                    add_review(r['reviewID'], r['review'], s, r['score'])
     
     
     #Doesn't seem to want to print it out in command line but doesn't effect the actual population        
