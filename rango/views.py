@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from rango.models import Artist, Album, Song
+from registration.backends.simple.views import RegistrationView
 
 def home(request):
     artist_list = Artist.objects.all()
@@ -207,3 +208,7 @@ def restricted(request):
 def logout(request):
     logout(request)
     return redirect(reverse('applausable:home'))
+
+class MyRegistrationView(RegistrationView):
+    def get_success_url(self, user):
+        return '/home/' 
