@@ -14,6 +14,7 @@ urlpatterns = [
     path('album/<slug:album_name_slug>/add_song/', views.add_song, name='add_song'),
     path('home/login/', views.login, name='login'),
     path('home/signup/', views.signup, name='signup'),
+    path('song/<slug:song_name_slug>/add_review/', views.add_review, name='add_review'),
     # Made a restricted page just cause rango has one in the book just in case we want to use it
     path('restricted/', views.restricted, name='restricted'),
     path('logout/', views.logout, name='logout'),

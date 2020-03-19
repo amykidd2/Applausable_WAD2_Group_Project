@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from rango.forms import UserForm, UserProfileForm, ArtistForm, AlbumForm, SongForm
+from rango.forms import UserForm, UserProfileForm, ArtistForm, AlbumForm, SongForm, ReviewForm
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rango.models import Artist, Album, Song
+from rango.models import Artist, Album, Song, Review
 from registration.backends.simple.views import RegistrationView
 
 def home(request):
@@ -64,10 +64,12 @@ def show_song(request, song_name_slug):
 
     try:
         song = Song.objects.get(slug= song_name_slug)
+        reviews = Review.objects.filter(songID=song)
         album = song.albumID
         context_dict['album'] = album
         context_dict['song'] = song
         context_dict['link'] = song.linkToSong
+        context_dict['reviews'] = reviews
 
     except Category.DoesNotExist:
         context_dict['album'] = None
@@ -149,6 +151,34 @@ def add_song(request, album_name_slug):
     context_dict = {'form': form, 'album': album}
     return render(request, 'applausable/add_song.html', context=context_dict)
 
+def add_review(request, song_name_slug):
+    try:
+        song = Song.objects.get(slug=song_name_slug)
+        mostRecentReview = Review.objects.order_by('-reviewID')[:1]
+        previousReview = Review.objects.get(reviewID=mostRecentReview)
+    except Song.DoesNotExist:
+        song = None
+        # You cannot add a page to a Category that does not exist...
+    if song is None:
+        return redirect('/')
+
+    form = ReviewForm()
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            if song:
+                review = form.save(commit=False)
+                review.songID = song
+                review.reviewID = previousReview.reviewID + 1
+                review.save()
+                return redirect(reverse('applausable:show_song',
+                kwargs={'song_name_slug':
+                song_name_slug}))
+        else:
+            print(form.errors)
+    context_dict = {'form': form, 'song': song}
+    return render(request, 'applausable/add_review.html', context=context_dict)
 
 def signup(request):
     registered = False

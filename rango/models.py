@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 import uuid
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Artist(models.Model): 
     artistID = models.IntegerField(primary_key=True, unique=True)
@@ -51,10 +52,10 @@ class Song(models.Model):
 
 class Review(models.Model): 
     reviewID = models.IntegerField(primary_key=True, unique=True)
-    review = models.CharField(max_length=248)
+    review = models.CharField(max_length=248, default= 'Review')
     #user = models.ForeignKey(User, on_delete=models.CASCADE) implement later
     songID = models.ForeignKey(Song, on_delete=models.CASCADE)
-    score = models.IntegerField(default=0)
+    score = models.IntegerField(default=0, validators=[MinValueValidator(0),MaxValueValidator(10)])
 
     def __str__(self): 
         return self.reviewID
