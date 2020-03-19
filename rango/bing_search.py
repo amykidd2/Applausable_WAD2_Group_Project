@@ -1,4 +1,5 @@
 import json
+#may need to pip install requests for yours to work
 import requests
 
 def read_bing_key(): 
