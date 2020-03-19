@@ -7,13 +7,38 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from rango.models import Artist, Album, Song, Review
 from registration.backends.simple.views import RegistrationView
-#from rango.bing_search import run_query
+from rango.bing_search import run_query
+from django.views.generic import TemplateView, ListView
+from django.db.models import Q
 
+    
 def home(request):
     artist_list = Artist.objects.all()
     context_dict = {}
     context_dict['artists'] = artist_list
     return render(request, 'applausable/home.html', context = context_dict)
+
+def SearchResultsView(request):
+    if request.method == 'GET':
+        query= request.GET.get('q')
+
+        submitbutton= request.GET.get('submit')
+
+        if query is not None:
+            lookups= Q(artistName__icontains=query)
+
+            results= Artist.objects.filter(lookups).distinct()
+
+            context={'results': results,
+                     'submitbutton': submitbutton}
+
+            return render(request, 'applausable/search_results.html', context)
+
+        else:
+            return render(request, 'applausable/search_results.html.html')
+
+    else:
+        return render(request, 'applausable/search_results.html.html')
 
 def artist(request):
     #TODO: update query so with filter so it only shows top reviewed
