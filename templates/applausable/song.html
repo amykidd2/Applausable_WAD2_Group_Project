@@ -3,6 +3,7 @@
 
 {% block title_block %}
     Song
+
 {% endblock %}
 
 {% block body_block %}
@@ -12,11 +13,18 @@ From:
 <a href="{% url 'applausable:show_album' album.slug %}">{{ album.albumName }}</a>
 <br />
 {% for review in reviews %}
-{{ review.review }} {{ review.score }} 
+{{ review.review }} {{ review.score }}
+
 <br />
+
+
 {% endfor %}
+Overall Score:
+{{overallScore.score__avg}}
+<br />
 <a href="{% url 'applausable:add_review' song.slug %}">Write a Review</a>
 <br />
+<p id="demo"></p>
 <div id="player"></div>
 
 <script id="searcher" link={{link}}>

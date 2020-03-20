@@ -10,6 +10,7 @@ from registration.backends.simple.views import RegistrationView
 from rango.bing_search import run_query
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
+from django.db.models import Avg
 
     
 def home(request):
@@ -91,11 +92,13 @@ def show_song(request, song_name_slug):
     try:
         song = Song.objects.get(slug= song_name_slug)
         reviews = Review.objects.filter(songID=song)
+        overallScore = Review.objects.filter(songID=song).aggregate(Avg('score'))
         album = song.albumID
         context_dict['album'] = album
         context_dict['song'] = song
         context_dict['link'] = song.linkToSong
         context_dict['reviews'] = reviews
+        context_dict['overallScore'] = overallScore
 
     except Category.DoesNotExist:
         context_dict['album'] = None
