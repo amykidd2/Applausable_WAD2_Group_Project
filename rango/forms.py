@@ -9,12 +9,13 @@ class ArtistForm(forms.ModelForm):
     genre = forms.CharField(max_length=128, help_text='Enter genre.')
     description = forms.CharField(max_length=248, help_text='Enter your artist description.')
     LinkToSocialMedia = forms.URLField(help_text='Enter your social media link.')
+    artistImage = forms.ImageField(help_text='Upload image of said artist here')
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
     #slug = forms.SlugField(widget=forms.HiddenInput(), required=False,unique=True, default=uuid.uuid1)
     class Meta:
         model = Artist
         
-        fields = ('artistName', 'genre', 'description', 'LinkToSocialMedia' )
+        fields = ('artistName', 'genre', 'description', 'LinkToSocialMedia', 'artistImage' )
 
 class AlbumForm(forms.ModelForm):
     #albumID = forms.IntegerField(widget=forms.HiddenInput(), initial=0000) #this doesnt work for some reason it just makes it 0 rather than increasing it.

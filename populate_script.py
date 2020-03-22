@@ -47,12 +47,12 @@ def populate():
     ]
      
     arts = {
-        1000 : {'albs': beatles_albs, 'artistName': 'The Beatles', 'genre': 'rock', 'description': 'John, Paul, George and Ringo', 'LinkToSocialMedia': 'https://www.youtube.com/user/thebeatles'}, 
-        2000 : {'albs': oasis_albs, 'artistName': 'Oasis', 'genre': 'rock', 'description': 'Liam, Noel, Paul, Paul and Tony', 'LinkToSocialMedia': 'https://www.youtube.com/user/oasisinetofficial'}
+        1000 : {'albs': beatles_albs, 'artistName': 'The Beatles', 'genre': 'rock', 'description': 'John, Paul, George and Ringo', 'LinkToSocialMedia': 'https://www.youtube.com/user/thebeatles', 'artistImage':'the_beatles.jpg'}, 
+        2000 : {'albs': oasis_albs, 'artistName': 'Oasis', 'genre': 'rock', 'description': 'Liam, Noel, Paul, Paul and Tony', 'LinkToSocialMedia': 'https://www.youtube.com/user/oasisinetofficial','artistImage':'oasis.jpg'}
     }
      
     for arts, arts_data in arts.items():
-        a = add_artist(arts, arts_data['artistName'], arts_data['genre'], arts_data['description'], arts_data['LinkToSocialMedia'])
+        a = add_artist(arts, arts_data['artistName'], arts_data['genre'], arts_data['description'], arts_data['LinkToSocialMedia'], arts_data['artistImage'])
         for album in arts_data['albs']:
             alb = add_album(a, album['albumID'], album['albumName'])
             for song in album['songs']:
@@ -87,12 +87,13 @@ def add_album(arts, albumID, albumName):
     alb.save()
     return alb
 
-def add_artist(artistID, artistName, genre, description, LinkToSocialMedia):
+def add_artist(artistID, artistName, genre, description, LinkToSocialMedia, artistImage):
     a = Artist.objects.get_or_create(artistID=artistID)[0]
     a.artistName=artistName
     a.genre=genre
     a.description=description
     a.LinkToSocialMedia=LinkToSocialMedia
+    a.artistImage = artistImage
     a.save()
     return a
 

@@ -11,7 +11,7 @@ from rango.bing_search import run_query
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 from django.db.models import Avg
-
+from django.conf import settings
     
 def home(request):
     artist_list = Artist.objects.all()
@@ -110,10 +110,12 @@ def add_artist(request):
     form = ArtistForm()
     
     if request.method == 'POST': 
-        form = ArtistForm(request.POST)
+        form = ArtistForm(request.POST, request.FILES)
         
         if form.is_valid():
-            form.save(commit=True)
+            artist = form.save(commit=True)
+            #artist.artistImage = form.cleaned_data['artistImage']
+
             return redirect('/')
         
         else:

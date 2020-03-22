@@ -7,32 +7,41 @@
 
 {% block body_block %}
 {% if artist %}
-    <h1>{{ artist.artistName }}</h1>
-    <div>
-        <h2> Albums: </h2>
+<h1>{{ artist.artistName }}</h1>
+<br />
+<img src="{{ MEDIA_URL }}{{ artist.artistImage }}"
+     width="300"
+     height="300"
+     alt="{{ artist.artistName }}'s profile image" />
+
+<br />
+
+
+<div>
+    <h2> Albums: </h2>
+    <ul>
+        {% if albums %}
+        {% for album in albums %}
+        {% ifequal artist.artistName album.artistID.artistName %}
+
+
+        <li><a href="{% url 'applausable:show_album' album.slug %}">{{ album.albumName }}</a></li>
         <ul>
-            {% if albums %}
-            {% for album in albums %}
-            {% ifequal artist.artistName album.artistID.artistName %}
-
-
-            <li><a href="{% url 'applausable:show_album' album.slug %}">{{ album.albumName }}</a></li>
-            <ul>
-                {% for song in songs %}
-                {% ifequal album.albumName song.albumID.albumName %}
-                <li>{{ song.title }}</li>
-                {% endifequal %}
-                {% endfor %}
-            </ul>
+            {% for song in songs %}
+            {% ifequal album.albumName song.albumID.albumName %}
+            <li>{{ song.title }}</li>
             {% endifequal %}
             {% endfor %}
-
         </ul>
-        {% else %}
-        <strong>This artist has no albums.</strong>
-        {% endif %}
-        <a href="{% url 'applausable:add_album' artist.slug %}">Add Album</a><br />
-    </div>
+        {% endifequal %}
+        {% endfor %}
+
+    </ul>
+    {% else %}
+    <strong>This artist has no albums.</strong>
+    {% endif %}
+    <a href="{% url 'applausable:add_album' artist.slug %}">Add Album</a><br />
+</div>
 {% else %}
 <h1>No artist found</h1>
 {% endif %}
