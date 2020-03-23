@@ -93,6 +93,10 @@ def show_song(request, song_name_slug):
         song = Song.objects.get(slug= song_name_slug)
         reviews = Review.objects.filter(songID=song)
         overallScore = Review.objects.filter(songID=song).aggregate(Avg('score'))
+        for score in overallScore.values():
+            replaceScore = score
+        Song.objects.filter(slug=song_name_slug).update(overallScore=replaceScore)
+
         album = song.albumID
         context_dict['album'] = album
         context_dict['song'] = song
