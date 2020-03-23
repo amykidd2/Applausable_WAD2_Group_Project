@@ -110,6 +110,13 @@ def show_song(request, song_name_slug):
 
     return render(request, 'applausable/song.html', context=context_dict)
 
+def highestReviewedSongs(request):
+    context_dict = {}
+    songs = Song.objects.order_by('-overallScore')[:10]
+
+    context_dict['songs'] = songs
+
+    return render(request, 'applausable/highestReviewedSongs.html', context=context_dict)
 def add_artist(request):
     form = ArtistForm()
     

@@ -58,7 +58,13 @@ Homepage
                                     </a>
                                 </li>
                                 {% endfor %}
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{% url 'applausable:highestReviewedSongs' %}">
+                                        Highest Reviewed Songs
+                                    </a>
+                                </li>
                                 {% else %}
+
                                 <li class="nav-item">There are no artists present.</li>
                                 {% endif %}
                             </div>
