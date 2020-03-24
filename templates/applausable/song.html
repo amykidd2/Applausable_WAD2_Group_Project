@@ -19,8 +19,10 @@ From:
 
 
 {% endfor %}
-Overall Score:
-{{overallScore.score__avg}}
+{% if overallScore %}
+    Overall Score:
+    {{overallScore.score__avg}}
+{% endif %}
 <br />
 <a href="{% url 'applausable:add_review' song.slug %}">Write a Review</a>
 
