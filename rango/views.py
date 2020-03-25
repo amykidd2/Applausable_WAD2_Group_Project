@@ -19,6 +19,10 @@ def home(request):
     context_dict['artists'] = artist_list
     return render(request, 'applausable/home.html', context = context_dict)
 
+def all_genre(request):
+    
+    return render(request, 'applausable/allGenres.html')
+
 def SearchResultsView(request):
     if request.method == 'GET':
         query= request.GET.get('q')
@@ -69,6 +73,16 @@ def show_artist(request, artist_name_slug):
         context_dict['albums'] = None
 
     return render(request, 'applausable/specificArtist.html', context=context_dict)
+
+def show_genre(request, genre_name):
+    context_dict = {}
+    try:
+        songs = Song.objects.filter(genre=genre_name).order_by('-overallScore')[:10]
+        context_dict['songs'] = songs
+    except Category.DoesNotExist:
+        context_dict['songs'] = None
+
+    return render(request, 'applausable/genre.html', context=context_dict)
 
 def show_album(request, album_name_slug):
     context_dict = {}

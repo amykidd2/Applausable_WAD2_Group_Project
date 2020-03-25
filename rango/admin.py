@@ -8,7 +8,7 @@ class AlbumAdmin(admin.ModelAdmin):
 admin.site.register(Album, AlbumAdmin)
 
 class SongAdmin(admin.ModelAdmin):
-    list_display = ('songID', 'title', 'slug', 'overallScore')
+    list_display = ('songID', 'title', 'slug', 'overallScore', 'genre')
 admin.site.register(Song, SongAdmin)
 
 class ArtistAdmin(admin.ModelAdmin):

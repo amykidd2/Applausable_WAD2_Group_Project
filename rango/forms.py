@@ -36,12 +36,26 @@ class AlbumForm(forms.ModelForm):
 
 
 class SongForm(forms.ModelForm):
+    GENRE_CHOICES = (
+    ('Pop','POP'),
+    ('Rock', 'ROCK'),
+    ('Metal','METAL'),
+    ('Soul','SOUL'),
+    ('Electronic','ELECTRONIC'),
+    ('Rap','RAP'),
+    ('Hip-Hop','HIP-HOP'),
+    ('Indie','INDIE'),
+    ('Classical','CLASSICAL'),
+    ('Country','COUNTRY'),
+    ('Jazz','JAZZ'),
+)
     #songID = forms.IntegerField(widget=forms.HiddenInput(), initial=0000)
     title = forms.CharField(max_length=128, help_text='Enter the song title')
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
     artistName = forms.CharField(max_length=128, help_text = 'Enter the name of the artist')
     overallScore = forms.IntegerField(widget=forms.HiddenInput(), initial=0000)
     linkToSong = forms.CharField(help_text='Enter youtube link to song')
+    genre = forms.ChoiceField(choices=GENRE_CHOICES, help_text = 'Choose artist genre')
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Song

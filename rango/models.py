@@ -36,6 +36,19 @@ class Album(models.Model):
         return self.albumID
 
 class Song(models.Model): 
+    GENRE_CHOICES = (
+    ('Pop','POP'),
+    ('Rock', 'ROCK'),
+    ('Metal','METAL'),
+    ('Soul','SOUL'),
+    ('Electronic','ELECTRONIC'),
+    ('Rap','RAP'),
+    ('Hip-Hop','HIP-HOP'),
+    ('Indie','INDIE'),
+    ('Classical','CLASSICAL'),
+    ('Country','COUNTRY'),
+    ('Jazz','JAZZ'),
+)
     songID = models.IntegerField(primary_key=True,  unique=True)
     title = models.CharField(max_length=128, default='Title')
     albumID = models.ForeignKey(Album, on_delete=models.CASCADE)
@@ -44,6 +57,7 @@ class Song(models.Model):
     linkToSong = models.CharField(max_length=248, default = 'link') 
     slug = models.SlugField(unique=True, default=uuid.uuid1)
     overallScore = models.IntegerField(default=0)
+    genre = models.CharField(max_length=15, choices=GENRE_CHOICES, default='Pop')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title + self.albumID.albumName)
