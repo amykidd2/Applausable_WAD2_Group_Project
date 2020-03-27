@@ -29,7 +29,7 @@
                     <li><a href="{% url 'applausable:restricted' %}"style="color:#ffffff;">Restricted Page</a> <a href="{% url 'auth_logout' %}?next={% url 'home' %}"style="color:#ffffff;">Logout</a></li>
                   
                 {% else %}
-                    <li><a href="{% url 'registration_register' %}"style="color:#ffffff;"><span class="glyphicon glyphicon-user"></span>Sign Up</a> <a href="{% url 'auth_login' %}"style="color:#ffffff;"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                    <li><a href="{% url 'applausable:signup' %}"style="color:#ffffff;"><span class="glyphicon glyphicon-user"></span>Sign Up </a> <a href="{% url 'auth_login' %}"style="color:#ffffff;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 					
                     
                 {% endif %}
