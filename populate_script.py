@@ -37,13 +37,13 @@ def populate():
 
 
     beatles_albs =[
-        {'albumID': 1010, 'albumName': 'Abbey Road','songs':abbeyRoad_songs},
-        {'albumID': 1020, 'albumName': 'Let It Be', 'songs':letItBe_songs}
+        {'albumID': 1010, 'albumName': 'Abbey Road','songs':abbeyRoad_songs, 'albumCover':'abbey_road.jpg'},
+        {'albumID': 1020, 'albumName': 'Let It Be', 'songs':letItBe_songs, 'albumCover':'let_it_be.png'}
     ]
      
     oasis_albs = [
-        {'albumID': 2010, 'albumName': '(Whats the Story) Morning Glory?', 'artistID':2000,'songs':wtsmg_songs},
-        {'albumID': 2020, 'albumName': 'Definetly Maybe','artistID':2000,'songs':definetlyMaybe_songs}
+        {'albumID': 2010, 'albumName': '(Whats the Story) Morning Glory?', 'artistID':2000,'songs':wtsmg_songs, 'albumCover':'wtsmg.jpg'},
+        {'albumID': 2020, 'albumName': 'Definetly Maybe','artistID':2000,'songs':definetlyMaybe_songs, 'albumCover':'definetly_maybe.jpg'}
     ]
      
     arts = {
@@ -54,7 +54,7 @@ def populate():
     for arts, arts_data in arts.items():
         a = add_artist(arts, arts_data['artistName'], arts_data['genre'], arts_data['description'], arts_data['LinkToSocialMedia'], arts_data['artistImage'])
         for album in arts_data['albs']:
-            alb = add_album(a, album['albumID'], album['albumName'])
+            alb = add_album(a, album['albumID'], album['albumName'], album['albumCover'])
             for song in album['songs']:
                 s = add_song(song['songID'], song['title'], alb, a, song['linkToSong'], song['artistName'], song['overallScore'], song['genre'])
                 for r in song['reviews']:
@@ -83,9 +83,10 @@ def add_song(songID, title, alb, a, linkToSong, artistName, overallScore, genre)
     song.save()
     return song
 
-def add_album(arts, albumID, albumName):
+def add_album(arts, albumID, albumName, albumCover):
     alb = Album.objects.get_or_create(artistID=arts, albumID=albumID)[0]
     alb.albumName=albumName
+    alb.albumCover = albumCover
     alb.save()
     return alb
 

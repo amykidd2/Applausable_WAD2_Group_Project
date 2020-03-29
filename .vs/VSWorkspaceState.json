@@ -4,8 +4,9 @@
     "\\Applausable",
     "\\rango",
     "\\templates",
-    "\\templates\\applausable"
+    "\\templates\\applausable",
+    "\\templates\\registration"
   ],
-  "SelectedNode": "\\templates\\applausable\\home.html",
+  "SelectedNode": "\\rango\\urls.py",
   "PreviewInSolutionExplorer": false
 }

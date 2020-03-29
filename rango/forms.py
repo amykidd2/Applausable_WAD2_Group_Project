@@ -21,6 +21,7 @@ class AlbumForm(forms.ModelForm):
     #albumID = forms.IntegerField(widget=forms.HiddenInput(), initial=0000) #this doesnt work for some reason it just makes it 0 rather than increasing it.
     albumName = forms.CharField(max_length=128, help_text='Enter the album name')
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
+    albumCover = forms.ImageField(help_text='Upload image of album cover here')
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Album
