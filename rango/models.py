@@ -57,6 +57,7 @@ class Song(models.Model):
     linkToSong = models.CharField(max_length=248, default = 'link') 
     slug = models.SlugField(unique=True, default=uuid.uuid1)
     overallScore = models.IntegerField(default=0)
+    songImage = models.ImageField(upload_to= settings.MEDIA_DIR + '/song_images/',default='default_song.png')
     genre = models.CharField(max_length=15, choices=GENRE_CHOICES, default='Pop')
 
     def save(self, *args, **kwargs):

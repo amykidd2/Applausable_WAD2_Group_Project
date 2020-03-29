@@ -13,7 +13,7 @@ admin.site.register(Song, SongAdmin)
 
 class ArtistAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('artistName',)}
-    list_display = ('artistID', 'artistName', 'genre', 'description', 'LinkToSocialMedia')
+    list_display = ('artistID', 'artistName', 'genre', 'description', 'LinkToSocialMedia', 'slug')
 admin.site.register(Artist, ArtistAdmin)
 
 admin.site.register(Review)

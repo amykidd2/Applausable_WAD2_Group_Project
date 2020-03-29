@@ -23,16 +23,16 @@ def populate():
     ]
 
     abbeyRoad_songs = [
-        {'songID': 1011, 'title': 'Come Together', 'albumID':1010,'artistName':'The Beatles', 'artistID': 1000, 'linkToSong':'https://www.youtube.com/watch?v=45cYwDMibGo', 'reviews': comeTogether_review, 'overallScore' : 4, 'genre' : 'Pop'}
+        {'songID': 1011, 'title': 'Come Together', 'albumID':1010,'artistName':'The Beatles', 'artistID': 1000, 'linkToSong':'https://www.youtube.com/watch?v=45cYwDMibGo', 'reviews': comeTogether_review, 'overallScore' : 4, 'genre' : 'Pop', 'songImage' : 'come_together.jpg'}
         ]
     letItBe_songs = [
-        {'songID': 1021, 'title': 'Let It Be', 'albumID':1020,'artistName':'The Beatles', 'artistID': 1000, 'linkToSong':'https://www.youtube.com/watch?v=QDYfEBY9NM4', 'reviews': letItBe_review, 'overallScore' : 5, 'genre' : 'Pop'}
+        {'songID': 1021, 'title': 'Let It Be', 'albumID':1020,'artistName':'The Beatles', 'artistID': 1000, 'linkToSong':'https://www.youtube.com/watch?v=QDYfEBY9NM4', 'reviews': letItBe_review, 'overallScore' : 5, 'genre' : 'Pop', 'songImage' : 'le_it_be.png'}
         ]
     wtsmg_songs = [
-        {'songID': 2011, 'title': 'Wonderwall', 'albumID':2010,'artistName':'Oasis', 'artistID': 2000, 'linkToSong':'https://www.youtube.com/watch?v=6hzrDeceEKc', 'reviews': wonderwall_review, 'overallScore' : 3, 'genre' : 'Pop'}
+        {'songID': 2011, 'title': 'Wonderwall', 'albumID':2010,'artistName':'Oasis', 'artistID': 2000, 'linkToSong':'https://www.youtube.com/watch?v=6hzrDeceEKc', 'reviews': wonderwall_review, 'overallScore' : 3, 'genre' : 'Pop', 'songImage' : 'wonderwall.jpg'}
         ]
     definetlyMaybe_songs = [
-        {'songID': 2021, 'title': 'Live Forever', 'albumID':2020,'artistName':'Oasis', 'artistID': 2000, 'linkToSong':'https://www.youtube.com/watch?v=i_2mWhfOhGU', 'reviews': liveForever_review, 'overallScore' : 1, 'genre' : 'Pop'}
+        {'songID': 2021, 'title': 'Live Forever', 'albumID':2020,'artistName':'Oasis', 'artistID': 2000, 'linkToSong':'https://www.youtube.com/watch?v=i_2mWhfOhGU', 'reviews': liveForever_review, 'overallScore' : 1, 'genre' : 'Pop', 'songImage' : 'live_forever.jpg'}
         ]
 
 
@@ -56,7 +56,7 @@ def populate():
         for album in arts_data['albs']:
             alb = add_album(a, album['albumID'], album['albumName'], album['albumCover'])
             for song in album['songs']:
-                s = add_song(song['songID'], song['title'], alb, a, song['linkToSong'], song['artistName'], song['overallScore'], song['genre'])
+                s = add_song(song['songID'], song['title'], alb, a, song['linkToSong'], song['artistName'], song['overallScore'], song['genre'], song['songImage'])
                 for r in song['reviews']:
                     add_review(r['reviewID'], r['review'], s, r['score'])
     
@@ -73,13 +73,14 @@ def add_review(reviewID, review, song, score):
     r.save()
     return r
 
-def add_song(songID, title, alb, a, linkToSong, artistName, overallScore, genre):
+def add_song(songID, title, alb, a, linkToSong, artistName, overallScore, genre, songImage):
     song = Song.objects.get_or_create(songID=songID,albumID=alb,artistID=a)[0]
     song.title=title
     song.artistName = artistName
     song.linkToSong = linkToSong
     song.overallScore = overallScore
     song.genre = genre
+    song.songImage = songImage
     song.save()
     return song
 
