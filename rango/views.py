@@ -163,7 +163,7 @@ def add_album(request, artist_name_slug):
     form = AlbumForm()
 
     if request.method == 'POST':
-        form = AlbumForm(request.POST)
+        form = AlbumForm(request.POST, request.FILES)
         if form.is_valid():
             if artist:
                 album = form.save(commit=False)

@@ -3,11 +3,23 @@
 
 {% block title_block %}
     Album
+
+    <script>
+    var MyGlobal = {
+         var_1: "{{ MEDIA_URL }}",
+         var_2: " {{ album.albumCover }}",
+        };
+    </script>
+    
 {% endblock %}
 
 {% block body_block %}
 {% if album %}
+
+<p id="bla"></p>
 <h1>{{ album.albumName }}</h1>
+<img id="myField" src="" width="300" height="300"
+     alt="{{ artist.artistName }}'s profile image" />
 <div>
     <h2> Songs: </h2>
     <ul>
@@ -26,9 +38,16 @@
     {% endif %}
 </div>
 <a href="{% url 'applausable:add_song' album.slug %}">Add Song</a>
-{% else %}
+<div>
+    <script>
+        var parts = "{{ album.albumCover }}".split('/');
+        var lastSegment = parts.pop() || parts.pop();  // handle potential trailing slash
+        document.getElementById("myField").src = " {{MEDIA_URL }}" + "album_covers/" + lastSegment;
+    </script>
+</div>
+    {% else %}
 
-<br />
-<h1>No album found</h1>
-{% endif %}
-{% endblock %}
+    <br />
+    <h1>No album found</h1>
+    {% endif %}
+    {% endblock %}

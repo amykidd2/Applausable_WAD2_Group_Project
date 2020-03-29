@@ -8,6 +8,7 @@
 
 {% block body_block %}
 {% if song %}
+{{ song.songImage }}
 <h1>{{ song.title }}</h1>
 From:
 <a href="{% url 'applausable:show_album' album.slug %}">{{ album.albumName }}</a>

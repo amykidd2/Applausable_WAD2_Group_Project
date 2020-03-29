@@ -12,7 +12,7 @@
 <h1>Add a Album</h1>
 <div>
     
-    <form id="album_form" method="post" action="{% url 'rango:add_album' artist.slug  %}">
+    <form id="album_form" method="post" enctype="multipart/form-data" action="{% url 'rango:add_album' artist.slug  %}" >
         {% csrf_token %}
         {% for hidden in form.hidden_fields %}
         {{ hidden }}
