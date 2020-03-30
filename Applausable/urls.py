@@ -14,19 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path, include
 from rango import views
+from django.conf import settings
+from django.conf.urls.static import static
+from registration.backends.simple.views import RegistrationView
 
-app_name = 'applausable'
+class MyRegistrationView(RegistrationView):
+    def get_success_url(self, user):
+        return '/home/'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('home/', views.home, name='home'),
-    path('home/artist/', views.artist, name='artist'),
-    path('home/artist//<slug:artist_name_slug>/', views.show_artist, name='show_artist'),
-    path('home/login/', views.login, name='login'),
-    path('home/signup/', views.signup, name='signup'),
-    # Made a restricted page just cause rango has one in the book just in case we want to use it
-    path('restricted/', views.restricted, name='restricted'),
-    path('logout/', views.logout, name='logout'),
-]
+    path(r'admin/', admin.site.urls),
+    path(r'', views.home, name='home'),
+    path(r'applausable/', include('rango.urls')),
+    path('accounts/', include('registration.backends.simple.urls')),
+    path('accounts/register', MyRegistrationView.as_view(), name="registration_register"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

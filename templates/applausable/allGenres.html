@@ -1,0 +1,68 @@
+﻿{% extends 'applausable/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Genres
+{% endblock %}
+
+{% block body_block %}
+    <h1>Genres:</h1>
+
+    <div>
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Pop' %}">
+                Top Pop Songs
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Rock' %}">
+                Top Rock Songs
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Electronic' %}">
+                Top Electronic Songs
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Jazz' %}">
+                Top Jazz Songs
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Indie' %}">
+                Top Indie Songs
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Metal' %}">
+                Top Metal Songs
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Classical' %}">
+                Top Classical Songs
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Country' %}">
+                Top Country Songs
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Rap' %}">
+                Top Rap Songs
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Hip-Hop' %}">
+                Top Hip-Hop Songs
+            </a>
+        </li>
+    </div>
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'applausable:show_genre' 'Soul' %}">
+            Top Soul Songs
+        </a>
+    </li>
+{% endblock %}

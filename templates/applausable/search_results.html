@@ -1,0 +1,26 @@
+﻿{% extends 'applausable/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+<meta charset="utf-8" />
+<title></title>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL}}search_results.css">
+{% endblock %}
+
+{% block body_block %}
+<h1>Search Results</h1>
+
+<ul id="navcontainer">
+    {% for result in results %}
+    <li>
+        <a href="{% url 'applausable:show_artist' result.slug %}">
+            <img border="0" alt="{{result.artistName}}" src="{{ MEDIA_URL }}{{ result.artistImage }}" width="100" height="100">
+        </a>
+        </p>
+        <a class="nav-link active" href="{% url 'applausable:show_artist' result.slug %}">
+            {{ result.artistName }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -6,26 +6,44 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Artist.</h1> 
+
+<div class="jumbotron p-4"> 
+    <div class="container"> 
+        <h1 class="jumbotron-heading">Top Rated Artists:</h1> 
+    </div>
+</div>
 <div>
-    <h2>Top Rated Artists:</h2>
-    {% if artists %}
-        <ul>
-        {% for artist in artists %}
-            <li>{{ artist.artistName }}</li>
-            {% if albums %}
-            <ul>
-                {% for album in albums %}
-                    <li>{{ album.albumName }}</a></li>
-                {% endfor %}
-            </ul>
-            {% else %}
-                <strong>No albums for this artist.</strong>
-            {% endif %}
-        {% endfor %}
-        </ul>
-    {% else %}
-        <strong>There are no rated artists.</strong>
-    {% endif %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-6">
+                <div class="card-body">
+                    {% if artists %}
+                    <ul class="nav flex-column">
+                        {% for artist in artists %}
+                        <li class="nav-item">
+                            {{ artist.artistName }}
+                        </li>
+                        <ul>
+                            {% if albums %}
+                            {% for album in albums %}
+                            {% ifequal artist.artistName album.artistID.artistName %}
+                            <li class="nav-item">
+                                {{ album.albumName }}
+                            </li>
+                            {% endifequal %}
+                            {% endfor %}
+                            {% endif %}
+                        </ul>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        <strong>There are no rated artists.</strong>
+                    {% endif %}    
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

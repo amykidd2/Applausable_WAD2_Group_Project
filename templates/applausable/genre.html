@@ -1,0 +1,27 @@
+﻿{% extends 'applausable/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Genre
+{% endblock %}
+
+{% block body_block %}
+
+{% if songs %}
+<div>
+    <h2> Songs: </h2>
+    <ul>
+        {% if songs %}
+        {% for song in songs %}
+        <li><a href="{% url 'applausable:show_song' song.slug %}">{{ song.title }}</a></li>
+        {% endfor %}
+
+    </ul>
+    {% endif %}
+</div>
+{% else %}
+
+<br />
+<h1>No songs found</h1>
+{% endif %}
+{% endblock %}

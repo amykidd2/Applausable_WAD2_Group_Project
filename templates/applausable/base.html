@@ -3,34 +3,59 @@
 <!-- #TODO: make template tags but do this when make review forum-->
 
 <html>
+
     <head>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" 
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
         <title>
             Appausable -
             {% block title_block %}
-                Music Reviewing!
+                Applausable
             {% endblock %}
         </title>
     </head>
     
     <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top navbar-dark bg-dark">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'home' %}">Applausable</a>
+              </div>
+              <ul class="nav navbar-nav">
+                <!--For some reason when regestering url don't need app_name ('applausable:home')-->
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'applausable:restricted' %}"style="color:#ffffff;">Restricted Page</a> <a href="{% url 'auth_logout' %}?next={% url 'home' %}"style="color:#ffffff;">Logout</a></li>
+                  
+                {% else %}
+                    <li><a href="{% url 'applausable:signup' %}"style="color:#ffffff;"><span class="glyphicon glyphicon-user"></span>Sign Up </a> <a href="{% url 'auth_login' %}"style="color:#ffffff;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					
+                    
+                {% endif %}
+              </ul>
+            </div>
+		</nav>
+  
         <div>
         {% block body_block %}
         {% endblock %}
         </div> 
         <hr />
-        <div>
-            <ul>
-                <!--For some reason when regestering url don't need app_name ('applausable:home')-->
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'restricted' %}">Restricted Page</a></li>
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
-                {% else %}
-                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                {% endif %}
-                    <li><a href="{% url 'artist' %}">Artist</a></li>
-                    <li><a href="{% url 'home' %}">Home</a></li>
-            </ul>
-        </div>
+
+        <nav class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="container-fluid">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'applausable:artist' %}">Artist</a></li>
+              </ul>
+            </div>
+          </nav>
+        
+    <!-- Bootstrap core JavaScript -->         
+    <!-- Placed at the end of the document so the pages load faster -->         
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>         
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>         
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>
