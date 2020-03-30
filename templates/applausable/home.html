@@ -3,34 +3,38 @@
 
 {% block title_block %}
 Homepage
+
 {% endblock %}
 
 {% block body_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
 
 <div class="jumbotron jumbotron-fluid p-10" style="height:75vh;" > 
-    <div class="container"> 
-        <h4 class="jumbotron-heading"> 
-            {% if user.is_authenticated %} 
-                Welcome {{ user.username }}! 
-            {% else %} 
-            <a href="{% url 'applausable:signup' %}">Sign Up for Applausable</a>
-            {% endif %}
-        </h4> 
-        <strong>{{ boldmessage }}</strong> 
-					
-                               
-		
-		<div class = "pt-5">
+	<div class="container">
+		<h4 class="jumbotron-heading">
+			{% if user.is_authenticated %}
+			Welcome {{ user.username }}!
+			{% else %}
+			<a href="{% url 'applausable:signup' %}">Sign Up for Applausable</a>
+			{% endif %}
+		</h4>
+		<strong>{{ boldmessage }}</strong>
+
+
+		<div class="pt-5" align="center">
+
 			<form action="{% url 'applausable:search_results' %}" method="GET" value="{{request.GET.q}}">
-				Search <input type="text" name="q" value="{{request.GET.q}}" placeholder="Search Artists" />
-				<input type="submit" name="submit" value="Search" />
+				<p>Search Applausable For You Favorite Artists</p>
+				<input type="text" name="q" value="{{request.GET.q}}" placeholder="Search Artists" />
+
 			</form>
 			<nav class="navbar navbar-expand-sm bg-light navbar-light justify-content-center">
 				<ul class="navbar-nav">
 					{% if submitbutton == 'Search' and request.GET.q != '' %}
 					{% if results %}
 					<h1>Results for <b>{{ request.GET.q }}</b></h1>
-					<br /><br />
+					<br />
+					<br />
 
 					{% for result in results %}
 
@@ -46,13 +50,7 @@ Homepage
 					{% endif %}
 					{% endif %}
 					{% if artists %}
-					{% for artist in artists %}
-					<li class="nav-item">
-						<a class="nav-link active" href="{% url 'applausable:show_artist' artist.slug %}">
-							{{ artist.artistName }}
-						</a>
-					</li>
-					{% endfor %}
+
 					<li class="nav-item">
 						<a class="nav-link active" href="{% url 'applausable:highestReviewedSongs' %}">
 							Highest Reviewed Songs
@@ -67,9 +65,10 @@ Homepage
 
 					<li class="nav-item">There are no artists present.</li>
 					{% endif %}
-			  </ul>
+				</ul>
 			</nav>
 		</div>
+		
 	</div> 
 </div>
 

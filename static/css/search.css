@@ -1,0 +1,18 @@
+﻿input[type=text] {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    background-color: white;
+    background-image: url('https://www.pngfind.com/pngs/m/54-544757_icons-logos-emojis-search-icon-png-grey-transparent.png');
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    background-size: 35px 35px
+}
+input::placeholder {
+    text-align: center;
+}
+ p {
+     font-size: x-large;
+ }
