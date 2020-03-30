@@ -11,7 +11,7 @@
 <h1 align ="center">Search Results</h1>
 
 <ul id="navcontainer">
-
+    <div class="img-with-text"></div>
     <table width="500" border="0" cellpadding="5" align="center">
         <tr>
             {% for result in results %}
@@ -21,7 +21,7 @@
                     <img src="{{ MEDIA_URL }}{{ result.artistImage }}"
                          width="300"
                          height="300" alt="Artist Image" />
-                    {{ result.artistName }}
+                    <p>{{ result.artistName }}</p>
                 </a>
                 
             </td>
@@ -32,6 +32,6 @@
             {% endfor %}
         </tr>
     </table>
-    
+    </div>
 </ul>
 {% endblock %}
