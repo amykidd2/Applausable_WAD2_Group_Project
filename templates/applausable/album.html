@@ -16,11 +16,11 @@
 {% block body_block %}
 {% if album %}
 
-<p id="bla"></p>
 <h1>{{ album.albumName }}</h1>
-<img id="myField" src="" width="300" height="300"
+<img  src="{{ MEDIA_URL }}{{ album.albumCover }}" width="300" height="300"
      alt="{{ artist.artistName }}'s profile image" />
 <div>
+    
     <h2> Songs: </h2>
     <ul>
         {% if songs %}
@@ -38,13 +38,7 @@
     {% endif %}
 </div>
 <a href="{% url 'applausable:add_song' album.slug %}">Add Song</a>
-<div>
-    <script>
-        var parts = "{{ album.albumCover }}".split('/');
-        var lastSegment = parts.pop() || parts.pop();  // handle potential trailing slash
-        document.getElementById("myField").src = " {{MEDIA_URL }}" + "album_covers/" + lastSegment;
-    </script>
-</div>
+
     {% else %}
 
     <br />

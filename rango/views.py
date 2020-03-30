@@ -166,6 +166,7 @@ def add_album(request, artist_name_slug):
         form = AlbumForm(request.POST, request.FILES)
         if form.is_valid():
             if artist:
+                
                 album = form.save(commit=False)
                 album.artistID = artist 
                 album.albumID = previousAlbum.albumID + 1

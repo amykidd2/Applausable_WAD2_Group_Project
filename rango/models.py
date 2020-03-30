@@ -27,7 +27,7 @@ class Album(models.Model):
     albumName = models.CharField(max_length=128)
     artistID = models.ForeignKey(Artist, on_delete=models.CASCADE)
     slug = models.SlugField(unique=True, default=uuid.uuid1)
-    albumCover = models.ImageField(upload_to= settings.MEDIA_DIR + '/album_covers/',default='default_album.png')
+    albumCover = models.ImageField(upload_to= 'album_covers/',default='default_album.jpg')
     def save(self, *args, **kwargs):
         self.slug = slugify(self.albumName + self.artistID.artistName)
         super(Album, self).save(*args, **kwargs)

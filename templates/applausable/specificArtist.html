@@ -3,9 +3,15 @@
 
 {% block title_block %}
     Artist
+<title></title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/general.css' %}">
+
+
+
 {% endblock %}
 
 {% block body_block %}
+
 {% if artist %}
 <h1>{{ artist.artistName }}</h1>
 <br />
@@ -19,7 +25,38 @@
 
 
 <div>
+    <p id= "test" ></p>
+
     <h2> Albums: </h2>
+
+    <div class="img-with-text"></div>
+    <table width="500" border="0" cellpadding="5" align="center">
+        <tr>
+            {% for album in albums %}
+            
+            <td align="center">
+                <a href="{% url 'applausable:show_album' album.slug %}">
+
+                    <img src="{{ MEDIA_URL }}{{ album.albumCover }}"
+                         width="300"
+                         height="300" alt="Album Cover" />
+                    <p>{{ album.albumName }}</p>
+                </a>
+
+            </td>
+            {% if not forloop.last and forloop.counter|divisibleby:3 %}
+        </tr>
+        <tr>
+            {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    
+</div>
+<div>
+
+</div>
+<div>
     <ul>
         {% if albums %}
         {% for album in albums %}
@@ -43,6 +80,7 @@
     {% endif %}
     <a href="{% url 'applausable:add_album' artist.slug %}">Add Album</a><br />
 </div>
+
 {% else %}
 <h1>No artist found</h1>
 {% endif %}
