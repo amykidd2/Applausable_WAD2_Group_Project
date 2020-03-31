@@ -8,17 +8,21 @@
 {% block body_block %}
 
 {% if songs %}
-<div>
-    <h2> Songs: </h2>
-    <ul>
-        {% if songs %}
+    <div>
+        <h2> Top 10 Songs in this genre: </h2>
         {% for song in songs %}
-        <li><a href="{% url 'applausable:show_song' song.slug %}">{{ song.title }}</a></li>
+        <div class="comments" align="center" style="padding: 10px;">
+            <p class="font-weight-bold">
+                {{ song.artistName }} - <a href="{% url 'applausable:show_song' song.slug %}">{{ song.title }}</a>
+                <span class=" text-muted font-weight-normal">
+                    
+                </span>
+            </p>
+
+        </div>
         {% endfor %}
 
-    </ul>
-    {% endif %}
-</div>
+    </div>
 {% else %}
 
 <br />
