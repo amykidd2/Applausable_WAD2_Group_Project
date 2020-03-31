@@ -291,10 +291,6 @@ def login(request):
         return render(request, 'applausable/login.html') 
 
 @login_required
-def restricted(request):
-    return HttpResponse("Since you're logged in, you can see this text!")
-
-@login_required
 def logout(request):
     logout(request)
     return redirect(reverse('applausable:home'))
@@ -313,3 +309,22 @@ def search(request):
             result_list = run_query(query)
 
     return render(request, 'applausable/search.html', {'result_list': result_list})
+
+@login_required
+def register_profile(request):
+    form = UserProfileForm()
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            user_profile = form.save(commit=False)
+            user_profile.user = request.user
+            user_profile.save()
+            
+            return redirect(reverse('home'))
+        else:
+            print(form.errors)
+
+    context_dict = {'form': form}
+    return render(request, 'applausable/profile_registration.html', context_dict)
