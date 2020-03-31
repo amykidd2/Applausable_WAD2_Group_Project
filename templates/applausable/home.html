@@ -15,7 +15,7 @@ Homepage
 			{% if user.is_authenticated %}
 			Welcome {{ user.username }}!
 			{% else %}
-			<a href="{% url 'applausable:signup' %}">Sign Up for Applausable</a>
+			<a href="{% url 'registration_register' %}">Sign Up for Applausable</a>
 			{% endif %}
 		</h4>
 		<strong>{{ boldmessage }}</strong>

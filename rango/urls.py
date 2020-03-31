@@ -16,11 +16,11 @@ urlpatterns = [
     path('album/<slug:album_name_slug>/add_song/', views.add_song, name='add_song'),
     path('song/<slug:song_name_slug>/add_review/', views.add_review, name='add_review'),
     # Made a restricted page just cause rango has one in the book just in case we want to use it
-    path('restricted/', views.restricted, name='restricted'),
-    #accounts templates can be used
-    path('logout/', views.logout, name='logout'),
-    path('home/login/', views.login, name='login'),
-    path('home/signup/', views.signup, name='signup'),
+    #path('restricted/', views.restricted, name='restricted'),
+    # Accounts templates are being used instead (url link found in other dir)
+    #path('logout/', views.logout, name='logout'),
+    #path('home/login/', views.login, name='login'),
+    #path('home/signup/', views.signup, name='signup'),
     path('search/', views.search, name='search'),
     path('searchResults/', views.SearchResultsView, name='search_results'),
     path('highestReviewedSongs/', views.highestReviewedSongs, name='highestReviewedSongs'),
