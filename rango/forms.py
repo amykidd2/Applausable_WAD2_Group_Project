@@ -57,7 +57,6 @@ class SongForm(forms.ModelForm):
     artistName = forms.CharField(max_length=128, help_text = 'Enter the name of the artist')
     overallScore = forms.IntegerField(widget=forms.HiddenInput(), initial=0000)
     linkToSong = forms.CharField(help_text='Enter youtube link to song')
-    songImage = forms.ImageField(help_text='Upload image of song here')
     genre = forms.ChoiceField(choices=GENRE_CHOICES, help_text = 'Choose artist genre')
     class Meta:
         # Provide an association between the ModelForm and a model

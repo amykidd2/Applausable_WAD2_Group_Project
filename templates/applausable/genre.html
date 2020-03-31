@@ -6,10 +6,10 @@
 {% endblock %}
 
 {% block body_block %}
-
+    <link rel="stylesheet" type="text/css" href="{% static 'css/photo_test.css' %}">
 {% if songs %}
     <div>
-        <h2> Top 10 Songs in this genre: </h2>
+        <h2 align="center"> Top 10 Songs in this genre: </h2>
         {% for song in songs %}
         <div class="comments" align="center" style="padding: 10px;">
             <p class="font-weight-bold">

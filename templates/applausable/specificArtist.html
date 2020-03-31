@@ -13,7 +13,7 @@
 {% block body_block %}
 
 {% if artist %}
-<h1>{{ artist.artistName }}</h1>
+<h1 align="center">{{ artist.artistName }}</h1>
 <br />
 
 <img src="{{ MEDIA_URL }}{{ artist.artistImage }}"
@@ -23,65 +23,58 @@
 
 <br />
 
+{% if mostPopularSongs %}
+    <h2 align="center"> Top Songs from this Artist: </h2>
+    {% for mSong in mostPopularSongs %}
+    <div class="comments" align="center" style="padding: 10px;">
+        <p class="font-weight-bold">
+            <a href="{% url 'applausable:show_song' mSong.slug %}">{{ mSong.title }}</a>
+            <span class=" text-muted font-weight-normal">
 
-<div>
-    <p id= "test" ></p>
+            </span>
+        </p>
 
-    <h2> Albums: </h2>
-
-    <div class="img-with-text"></div>
-    <table width="500" border="0" cellpadding="5" align="center">
-        <tr>
-            {% for album in albums %}
-            
-            <td align="center">
-                <a href="{% url 'applausable:show_album' album.slug %}">
-
-                    <img src="{{ MEDIA_URL }}{{ album.albumCover }}"
-                         width="300"
-                         height="300" alt="Album Cover" />
-                    <p>{{ album.albumName }}</p>
-                </a>
-
-            </td>
-            {% if not forloop.last and forloop.counter|divisibleby:3 %}
-        </tr>
-        <tr>
-            {% endif %}
-            {% endfor %}
-        </tr>
-    </table>
-    
-</div>
-<div>
-
-</div>
-<div>
-    <ul>
-        {% if albums %}
-        {% for album in albums %}
-        {% ifequal artist.artistName album.artistID.artistName %}
-
-
-        <li><a href="{% url 'applausable:show_album' album.slug %}">{{ album.albumName }}</a></li>
-        <ul>
-            {% for song in songs %}
-            {% ifequal album.albumName song.albumID.albumName %}
-            <li>{{ song.title }}</li>
-            {% endifequal %}
-            {% endfor %}
-        </ul>
-        {% endifequal %}
-        {% endfor %}
-
-    </ul>
-    {% else %}
-    <strong>This artist has no albums.</strong>
+    </div>
+    {% endfor %}
     {% endif %}
-    <a href="{% url 'applausable:add_album' artist.slug %}">Add Album</a><br />
-</div>
+    <div>
+        <p id="test"></p>
 
-{% else %}
-<h1>No artist found</h1>
-{% endif %}
-{% endblock %}
+        <h2 align="center"> Albums: </h2>
+
+        <div class="img-with-text"></div>
+        <table width="500" border="0" cellpadding="5" align="center">
+            <tr>
+                {% for album in albums %}
+
+                <td align="center">
+                    <a href="{% url 'applausable:show_album' album.slug %}">
+
+                        <img src="{{ MEDIA_URL }}{{ album.albumCover }}"
+                             width="300"
+                             height="300" alt="Album Cover" />
+                        <p>{{ album.albumName }}</p>
+                    </a>
+
+                </td>
+                {% if not forloop.last and forloop.counter|divisibleby:3 %}
+            </tr>
+            <tr>
+                {% endif %}
+                {% endfor %}
+            </tr>
+        </table>
+
+    </div>
+    <div>
+
+    </div>
+    <div>
+  
+        <a href="{% url 'applausable:add_album' artist.slug %}">Add Album</a><br />
+    </div>
+
+    {% else %}
+    <h1>No artist found</h1>
+    {% endif %}
+    {% endblock %}

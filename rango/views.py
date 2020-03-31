@@ -64,10 +64,11 @@ def show_artist(request, artist_name_slug):
         artist = Artist.objects.get(slug=artist_name_slug)
         albums = Album.objects.filter(artistID=artist) 
         songs = Song.objects.filter(artistID= artist)
+        mostPopularSongs = Song.objects.filter(artistID= artist).order_by('-overallScore')[:5]
         context_dict['albums'] = albums
         context_dict['artist'] = artist 
         context_dict['songs'] = songs
-
+        context_dict['mostPopularSongs'] = mostPopularSongs
     except Category.DoesNotExist:
         context_dict['artist'] = None
         context_dict['albums'] = None
