@@ -5,12 +5,21 @@
 h1 {
     text-align : "center";
 }
+p.overallscore{
+    color: black;
+    font-family:'High Tower Text';
+}
+img {
+    align-content: center;
+}
 .img-with-text {
+
     text-align: justify;
     width: 300;
 }
 
     .img-with-text img {
+
         display: block;
         margin: 0 auto;
     }

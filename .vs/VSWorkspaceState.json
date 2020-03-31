@@ -3,10 +3,12 @@
     "",
     "\\Applausable",
     "\\rango",
+    "\\static",
+    "\\static\\css",
     "\\templates",
     "\\templates\\applausable",
     "\\templates\\registration"
   ],
-  "SelectedNode": "\\rango\\models.py",
+  "SelectedNode": "\\static\\css\\search.css",
   "PreviewInSolutionExplorer": false
 }

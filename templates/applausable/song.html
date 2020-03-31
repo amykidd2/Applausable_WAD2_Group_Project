@@ -4,28 +4,53 @@
 {% block title_block %}
     Song
 
+
 {% endblock %}
 
 {% block body_block %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/general.css' %}">
 {% if song %}
-{{ song.songImage }}
-<h1>{{ song.title }}</h1>
-From:
-<a href="{% url 'applausable:show_album' album.slug %}">{{ album.albumName }}</a>
-<br />
-{% for review in reviews %}
-{{ review.review }} {{ review.score }}
 
-<br />
+<h1 align="center">{{ song.title }}</h1>
+</br>
 
-
-{% endfor %}
 {% if overallScore %}
-    Overall Score:
-    {{overallScore.score__avg}}
+    
+<p class="overallscore" align="center">Overall Score : {{overallScore.score__avg|floatformat}}/10</p>
 {% endif %}
+
+<br/>
+
+{% for review in reviews %}
+<div class="comments" align="center" style="padding: 10px;">
+    <p class="font-weight-bold">
+        {{ review.score }}
+        <span class=" text-muted font-weight-normal">
+
+        </span>
+    </p>
+    {{ review.review | linebreaks }}
+</div>
+        {% endfor %}
+
 <br />
-<a href="{% url 'applausable:add_review' song.slug %}">Write a Review</a>
+
+
+
+
+<br />
+<a  href="{% url 'applausable:add_review' song.slug %}">Write a Review</a>
+
+<p>From {{ song.albumID.albumName }}</p>
+
+<a href="{% url 'applausable:show_album' song.albumID.slug %}">
+
+    <img src="{{ MEDIA_URL }}{{ song.albumID.albumCover }}"
+         width="300"
+         height="300" alt="Album Cover" />
+    
+</a>
 
 
 <p id="demo"></p>

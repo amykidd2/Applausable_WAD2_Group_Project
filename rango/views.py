@@ -108,6 +108,7 @@ def show_song(request, song_name_slug):
         reviews = Review.objects.filter(songID=song)
         if reviews:
             overallScore = Review.objects.filter(songID=song).aggregate(Avg('score'))
+            #overallScore = Round(overallScore)
             for score in overallScore.values():
                 replaceScore = score
             Song.objects.filter(slug=song_name_slug).update(overallScore=replaceScore)

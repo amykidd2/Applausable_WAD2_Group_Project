@@ -6,63 +6,125 @@
 {% endblock %}
 
 {% block body_block %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/photo_test.css' %}">
     <h1>Genres:</h1>
 
-    <div>
-        <li class="nav-item">
-            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Pop' %}">
-                Top Pop Songs
+<table cellpadding="25" align="center">
+    <tr>
+        <td>
+            <a class="photo" id="photo" href="{% url 'applausable:show_genre' 'Pop' %}">
+
+                <img src="{{ MEDIA_URL }}genre_images/Pop.png"
+                     width="150"
+                     height="150" alt="Pop Image" />
+
             </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Rock' %}">
-                Top Rock Songs
+        </td>
+        <td>
+            <a href="{% url 'applausable:show_genre' 'Rock' %}">
+
+                <img src="{{ MEDIA_URL }}genre_images/Rock.png"
+                     width="150"
+                     height="150" alt="Rock Image" />
+
             </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Electronic' %}">
-                Top Electronic Songs
+        </td>
+        <td>
+            <a href="{% url 'applausable:show_genre' 'Soul' %}">
+
+                <img src="{{ MEDIA_URL }}genre_images/Soul.png"
+                     width="150"
+                     height="150" alt="Soul Image" />
+
             </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Jazz' %}">
-                Top Jazz Songs
+        </td>
+        <td>
+            <a href="{% url 'applausable:show_genre' 'Jazz' %}">
+
+                <img src="{{ MEDIA_URL }}genre_images/Jazz.png"
+                     width="150"
+                     height="150" alt="Jazz Image" />
+
             </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Indie' %}">
-                Top Indie Songs
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="{% url 'applausable:show_genre' 'Classical' %}">
+
+                <img src="{{ MEDIA_URL }}genre_images/Classical.png"
+                     width="150"
+                     height="150" alt="Classical Image" />
+
             </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Metal' %}">
-                Top Metal Songs
+        </td>
+        <td>
+            <a href="{% url 'applausable:show_genre' 'Country' %}">
+
+                <img src="{{ MEDIA_URL }}genre_images/Country.png"
+                     width="150"
+                     height="150" alt="Country Image" />
+
             </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Classical' %}">
-                Top Classical Songs
+        </td>
+        <td>
+            <a href="{% url 'applausable:show_genre' 'Indy' %}">
+
+                <img src="{{ MEDIA_URL }}genre_images/Indy.png"
+                     width="150"
+                     height="150" alt="Indy Image" />
+
             </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Country' %}">
-                Top Country Songs
+        </td>
+        <td>
+            <a href="{% url 'applausable:show_genre' 'R&B' %}">
+
+                <img src="{{ MEDIA_URL }}genre_images/R&B.png"
+                     width="150"
+                     height="150" alt="R&B Image" />
+
             </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Rap' %}">
-                Top Rap Songs
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="{% url 'applausable:show_genre' 'Metal' %}">
+
+                <img src="{{ MEDIA_URL }}genre_images/Metal.png"
+                     width="150"
+                     height="150" alt="Metal Image" />
+
             </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" href="{% url 'applausable:show_genre' 'Hip-Hop' %}">
-                Top Hip-Hop Songs
+        </td>
+        <td>
+            <a href="{% url 'applausable:show_genre' 'Reggae' %}">
+
+                <img src="{{ MEDIA_URL }}genre_images/Reggae.png"
+                     width="150"
+                     height="150" alt="Reggae Image" />
+
             </a>
-        </li>
-    </div>
-    <li class="nav-item">
-        <a class="nav-link active" href="{% url 'applausable:show_genre' 'Soul' %}">
-            Top Soul Songs
-        </a>
-    </li>
+        </td>
+        <td>
+            <a href="{% url 'applausable:show_genre' 'Hip-Hop' %}">
+
+                <img src="{{ MEDIA_URL }}genre_images/Hip-Hop.png"
+                     width="150"
+                     height="150" alt="Hip-Hop Image" />
+
+            </a>
+        </td>
+        <td>
+            <a href="{% url 'applausable:show_genre' 'Electronic' %}">
+
+                <img src="{{ MEDIA_URL }}genre_images/Electronic.png"
+                     width="150"
+                     height="150" alt="Electronic Image" />
+
+            </a>
+        </td>
+    </tr>
+</table>
+
+
 {% endblock %}
