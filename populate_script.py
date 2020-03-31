@@ -37,13 +37,13 @@ def populate():
 
 
     beatles_albs =[
-        {'albumID': 1010, 'albumName': 'Abbey Road','songs':abbeyRoad_songs, 'albumCover':'abbey_road.jpg'},
-        {'albumID': 1020, 'albumName': 'Let It Be', 'songs':letItBe_songs, 'albumCover':'let_it_be.png'}
+        {'albumID': 1010, 'albumName': 'Abbey Road','songs':abbeyRoad_songs, 'albumCover':'album_covers/abbey_road.jpg'},
+        {'albumID': 1020, 'albumName': 'Let It Be', 'songs':letItBe_songs, 'albumCover':'album_covers/let_it_be.png'}
     ]
      
     oasis_albs = [
-        {'albumID': 2010, 'albumName': '(Whats the Story) Morning Glory?', 'artistID':2000,'songs':wtsmg_songs, 'albumCover':'wtsmg.jpg'},
-        {'albumID': 2020, 'albumName': 'Definetly Maybe','artistID':2000,'songs':definetlyMaybe_songs, 'albumCover':'definetly_maybe.jpg'}
+        {'albumID': 2010, 'albumName': '(Whats the Story) Morning Glory?', 'artistID':2000,'songs':wtsmg_songs, 'albumCover':'album_covers/wtsmg.jpg'},
+        {'albumID': 2020, 'albumName': 'Definetly Maybe','artistID':2000,'songs':definetlyMaybe_songs, 'albumCover':'album_covers/definetly_maybe.jpg'}
     ]
      
     arts = {
