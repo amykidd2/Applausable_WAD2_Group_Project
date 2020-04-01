@@ -10,6 +10,7 @@
 
 <div class='jumbotron jumbotron-fluid'>
 	<div class='container'>
+		
 		{% if user.is_authenticated %}
 		Welcome {{ user.username }}! <a href="{% url 'applausable:show_user'%}">User Page</a>
 		{% else %}
@@ -36,22 +37,22 @@
 				<h1>Results for <b>{{ request.GET.q }}</b></h1>
 				<br />
 				<br />
-		
+
 				{% for result in results %}
-		
+
 				{{result.title}}
 				<br />
-		
+
 				{{result.content}}
 				<br />
-		
+
 				{% endfor %}
 				{% else %}
 				No search results for this query
 				{% endif %}
 				{% endif %}
 				{% if artists %}
-		
+
 				<li class="nav-item">
 					<a class="nav-link active" href="{% url 'applausable:highestReviewedSongs' %}">
 						Highest Reviewed Songs
@@ -62,8 +63,17 @@
 						View Songs By Genre
 					</a>
 				</li>
+				{% if request.user.is_superuser %}
+				<li class="nav-item">
+					<a class="nav-link active" href="{% url 'applausable:add_artist' %}">
+						Add an Artist
+					</a>
+				</li>
+				
+
+				{% endif %}
 				{% else %}
-		
+
 				<li class="nav-item">There are no artists present.</li>
 				{% endif %}
 			</ul>

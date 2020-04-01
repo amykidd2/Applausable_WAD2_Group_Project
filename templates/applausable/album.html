@@ -34,7 +34,9 @@
     <strong>This album has no songs.</strong>
     {% endif %}
 </div>
+{% if request.user.is_superuser %}
 <a href="{% url 'applausable:add_song' album.slug %}">Add Song</a>
+{% endif %}
 
     {% else %}
 

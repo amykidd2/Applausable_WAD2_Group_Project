@@ -70,8 +70,9 @@
 
     </div>
     <div>
-  
+        {% if request.user.is_superuser %}
         <a href="{% url 'applausable:add_album' artist.slug %}">Add Album</a><br />
+        {% endif %}
     </div>
 
     {% else %}

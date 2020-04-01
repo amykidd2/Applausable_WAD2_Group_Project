@@ -16,18 +16,25 @@
 </div>
 
 <div class='container' algin='center'>
-    {% for result in results %}
-        <a href="{% url 'applausable:show_artist' result.slug %}">
-    
-            <img src="{{ MEDIA_URL }}{{ result.artistImage }}"
-                 width="200"
-                 height="200" alt="Artist Image" />
-            <div class='p-1'><p>{{ result.artistName }}</p></div>
-        </a>
-        
-    {% if not forloop.last and forloop.counter|divisibleby:3 %}
+    <div class="img-with-text"></div>
+    <table width="500" border="0" cellpadding="5" align="center">
+        <tr>
+            {% for result in results %}
+            <td align="center">
+                <a href="{% url 'applausable:show_artist' result.slug %}">
 
-    {% endif %}
-    {% endfor %}
+                    <img src="{{ MEDIA_URL }}{{ result.artistImage }}"
+                         width="200"
+                         height="200" alt="Artist Image" />
+                    <div class='p-1'><p>{{ result.artistName }}</p></div>
+                </a>
+            </td>
+            {% if not forloop.last and forloop.counter|divisibleby:3 %}
+        </tr>
+        <tr>
+            {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
 </div>
 {% endblock %}
