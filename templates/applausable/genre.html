@@ -6,26 +6,28 @@
 {% endblock %}
 
 {% block body_block %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/photo_test.css' %}">
-{% if songs %}
-    <div>
-        <h2 align="center"> Top 10 Songs in this genre: </h2>
-        {% for song in songs %}
-        <div class="comments" align="center" style="padding: 10px;">
-            <p class="font-weight-bold">
-                {{ song.artistName }} - <a href="{% url 'applausable:show_song' song.slug %}">{{ song.title }}</a>
-                <span class=" text-muted font-weight-normal">
-                    
-                </span>
-            </p>
+<link rel="stylesheet" type="text/css" href="{% static 'css/photo_test.css' %}">
 
+{% if songs %}
+    <div class="jumbotron">
+        <h2 algin='center'> Top 10 Songs in this genre: </h2>
+    </div>
+        {% for song in songs %}
+        <div class="container">
+            <div class="comments" align="center" style="padding: 10px;">
+                <p class="font-weight-bold">
+                    {{ song.artistName }} - <a href="{% url 'applausable:show_song' song.slug %}">{{ song.title }}</a>
+                    <span class=" text-muted font-weight-normal">
+                        
+                    </span>
+                </p>
+    
+            </div>
         </div>
         {% endfor %}
-
-    </div>
 {% else %}
-
 <br />
 <h1>No songs found</h1>
 {% endif %}
+
 {% endblock %}

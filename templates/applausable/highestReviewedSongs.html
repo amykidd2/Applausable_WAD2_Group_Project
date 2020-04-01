@@ -10,35 +10,18 @@ Homepage
 
 <div class="jumbotron jumbotron-fluid p-4">
     <div class="container">
-        <h4 class="jumbotron-heading">
-
-            <a href="{% url 'registration_register' %}">Sign Up for Applausable</a>
-        </h4>
-        <strong>{{ boldmessage }}</strong>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card mb-6">
-                        <div class="card-body">
-                            <div class='container'>
-                                {% if songs %}
-                                    <li>
-                                        {% for song in songs %}
-                                        <a class="nav-link active" href="{% url 'applausable:show_song' song.slug %}">
-                                            {{ song.title }}
-                                        </a> with a score of {{song.overallScore}}
-                                        {% endfor %}
-                                    </li>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h1>Our Song Ranking:</h1>
     </div>
 </div>
 
-<!-- Page 225-226 of book has good bootstrap display for artists and songs when it comes to it-->
+
+<div class="container">
+    {% if songs %}
+            {% for song in songs %}
+            <a class="nav-link active" href="{% url 'applausable:show_song' song.slug %}">
+                {{ song.title }}</a> with a score of {{song.overallScore}}
+            {% endfor %}
+    {% endif %}
+</div>
+
 {% endblock %}

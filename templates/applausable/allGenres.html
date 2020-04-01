@@ -6,8 +6,13 @@
 {% endblock %}
 
 {% block body_block %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/photo_test.css' %}">
-    <h1>Genres:</h1>
+<link rel="stylesheet" type="text/css" href="{% static 'css/photo_test.css' %}">
+
+<div class='jumbotron jumbotron-fluid'>
+    <div class='container'>
+        <h1>Genres:</h1>
+    </div>
+</div>
 
 <table cellpadding="25" align="center">
     <tr>
@@ -125,6 +130,5 @@
         </td>
     </tr>
 </table>
-
 
 {% endblock %}
