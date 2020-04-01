@@ -94,9 +94,10 @@ def show_album(request, album_name_slug):
     try:
         album = Album.objects.get(slug=album_name_slug)
         songs = Song.objects.filter(albumID= album)
+        overallScore = Song.objects.filter(albumID=album).aggregate(Avg('overallScore'))
         context_dict['album'] = album
         context_dict['songs'] = songs
-
+        context_dict['overallScore'] = overallScore
     except Category.DoesNotExist:
         context_dict['album'] = None
         context_dict['songs'] = None
