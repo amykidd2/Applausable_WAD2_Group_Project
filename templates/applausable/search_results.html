@@ -2,36 +2,31 @@
 {% load staticfiles %}
 
 {% block title_block %}
-<meta charset="utf-8" />
-<title></title>
-<link rel="stylesheet" type="text/css" href="{% static 'css/general.css' %}">
+    Search Results
 {% endblock %}
 
 {% block body_block %}
-<h1 align ="center">Search Results</h1>
-
-<ul id="navcontainer">
-    <div class="img-with-text"></div>
-    <table width="500" border="0" cellpadding="5" align="center">
-        <tr>
-            {% for result in results %}
-            <td align="center">
-                <a href="{% url 'applausable:show_artist' result.slug %}">
-
-                    <img src="{{ MEDIA_URL }}{{ result.artistImage }}"
-                         width="300"
-                         height="300" alt="Artist Image" />
-                    <p>{{ result.artistName }}</p>
-                </a>
-                
-            </td>
-            {% if not forloop.last and forloop.counter|divisibleby:3 %}
-        </tr>
-        <tr>
-            {% endif %}
-            {% endfor %}
-        </tr>
-    </table>
+<div class="jumbotron">
+    <div class='container'>
+        {% for result in results %}
+            <h1>Search Results for {{ result.artistName }}</h1>
+        {% endfor %}
     </div>
-</ul>
+</div>
+
+<div class='container algin-content-center'>
+    {% for result in results %}
+        <a href="{% url 'applausable:show_artist' result.slug %}">
+    
+            <img src="{{ MEDIA_URL }}{{ result.artistImage }}"
+                 width="200"
+                 height="200" alt="Artist Image" />
+            <div class='p-1'><p>{{ result.artistName }}</p></div>
+        </a>
+        
+    {% if not forloop.last and forloop.counter|divisibleby:3 %}
+
+    {% endif %}
+    {% endfor %}
+</div>
 {% endblock %}

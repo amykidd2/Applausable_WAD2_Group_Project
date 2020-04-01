@@ -2,76 +2,74 @@
 {% load staticfiles %}
 
 {% block title_block %}
-Homepage
-
+    Homepage
 {% endblock %}
 
 {% block body_block %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
 
-<div class="jumbotron jumbotron-fluid p-10" style="height:75vh;" > 
-	<div class="container">
-		<h4 class="jumbotron-heading">
-			{% if user.is_authenticated %}
-			Welcome {{ user.username }}!
-			{% else %}
-			<a href="{% url 'registration_register' %}">Sign Up for Applausable</a>
-			{% endif %}
+<div class='jumbotron jumbotron-fluid'>
+	<div class='container'>
+		{% if user.is_authenticated %}
+		Welcome {{ user.username }}!
+		{% else %}
+		<a href="{% url 'registration_register' %}">Sign Up for Applausable</a>
+		{% endif %}
 		</h4>
 		<strong>{{ boldmessage }}</strong>
+	</div>
 
+	<div class='container p-4'>
+		<h4 class="jumbotron-heading">
+			<p>Search Applausable For You Favorite Artists</p>
+		</h4>
+		<form action="{% url 'applausable:search_results' %}" method="GET" value="{{request.GET.q}}">
+			<input type="text" name="q" value="{{request.GET.q}}" placeholder="Search Artists" />	
+		</form>
+	</div>
 
-		<div class="pt-5" align="center">
-
-			<form action="{% url 'applausable:search_results' %}" method="GET" value="{{request.GET.q}}">
-				<p>Search Applausable For You Favorite Artists</p>
-				<input type="text" name="q" value="{{request.GET.q}}" placeholder="Search Artists" />
-
-			</form>
-			<nav class="navbar navbar-expand-sm bg-light navbar-light justify-content-center">
-				<ul class="navbar-nav">
-					{% if submitbutton == 'Search' and request.GET.q != '' %}
-					{% if results %}
-					<h1>Results for <b>{{ request.GET.q }}</b></h1>
-					<br />
-					<br />
-
-					{% for result in results %}
-
-					{{result.title}}
-					<br />
-
-					{{result.content}}
-					<br />
-
-					{% endfor %}
-					{% else %}
-					No search results for this query
-					{% endif %}
-					{% endif %}
-					{% if artists %}
-
-					<li class="nav-item">
-						<a class="nav-link active" href="{% url 'applausable:highestReviewedSongs' %}">
-							Highest Reviewed Songs
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" href="{% url 'applausable:all_genre' %}">
-							View Songs By Genre
-						</a>
-					</li>
-					{% else %}
-
-					<li class="nav-item">There are no artists present.</li>
-					{% endif %}
-				</ul>
-			</nav>
-		</div>
+	<div class='container'>
+		<nav class="navbar navbar-expand-sm bg-light navbar-light justify-content-center">
+			<ul class="navbar-nav">
+				{% if submitbutton == 'Search' and request.GET.q != '' %}
+				{% if results %}
+				<h1>Results for <b>{{ request.GET.q }}</b></h1>
+				<br />
+				<br />
 		
-	</div> 
+				{% for result in results %}
+		
+				{{result.title}}
+				<br />
+		
+				{{result.content}}
+				<br />
+		
+				{% endfor %}
+				{% else %}
+				No search results for this query
+				{% endif %}
+				{% endif %}
+				{% if artists %}
+		
+				<li class="nav-item">
+					<a class="nav-link active" href="{% url 'applausable:highestReviewedSongs' %}">
+						Highest Reviewed Songs
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" href="{% url 'applausable:all_genre' %}">
+						View Songs By Genre
+					</a>
+				</li>
+				{% else %}
+		
+				<li class="nav-item">There are no artists present.</li>
+				{% endif %}
+			</ul>
+		</nav>
+	</div>
 </div>
-
 
 <!-- Page 225-226 of book has good bootstrap display for artists and songs when it comes to it-->
 

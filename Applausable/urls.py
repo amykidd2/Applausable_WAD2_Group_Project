@@ -26,9 +26,9 @@ class MyRegistrationView(RegistrationView):
         return reverse('applausable:register_profile')
 
 urlpatterns = [
-    path(r'admin/', admin.site.urls),
-    path(r'', views.home, name='home'),
-    path(r'applausable/', include('rango.urls')),
+    path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+    path('applausable/', include('rango.urls')),
     path('accounts/register/', MyRegistrationView.as_view(), name='registration_register'),
     path('accounts/', include('registration.backends.simple.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
