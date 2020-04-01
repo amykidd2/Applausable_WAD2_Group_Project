@@ -30,55 +30,58 @@
 	</div>
 
 	<div class='container'>
-		<nav class="navbar navbar-expand-sm bg-light navbar-light justify-content-center">
-			<ul class="navbar-nav">
-				{% if submitbutton == 'Search' and request.GET.q != '' %}
-				{% if results %}
-				<h1>Results for <b>{{ request.GET.q }}</b></h1>
-				<br />
-				<br />
-
-				{% for result in results %}
-
-				{{result.title}}
-				<br />
-
-				{{result.content}}
-				<br />
-
-				{% endfor %}
-				{% else %}
-				No search results for this query
-				{% endif %}
-				{% endif %}
-				{% if artists %}
-
-				<li class="nav-item">
-					<a class="nav-link active" href="{% url 'applausable:highestReviewedSongs' %}">
-						Highest Reviewed Songs
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link active" href="{% url 'applausable:all_genre' %}">
-						View Songs By Genre
-					</a>
-				</li>
-				{% if request.user.is_superuser %}
-				<li class="nav-item">
-					<a class="nav-link active" href="{% url 'applausable:add_artist' %}">
-						Add an Artist
-					</a>
-				</li>
-				
-
-				{% endif %}
-				{% else %}
-
-				<li class="nav-item">There are no artists present.</li>
-				{% endif %}
-			</ul>
-		</nav>
+		{% if submitbutton == 'Search' and request.GET.q != '' %}
+		{% if results %}
+		<h1>Results for <b>{{ request.GET.q }}</b></h1>
+		<br />
+		<br />
+	
+		{% for result in results %}
+	
+		{{result.title}}
+		<br />
+	
+		{{result.content}}
+		<br />
+	
+		{% endfor %}
+		{% else %}
+		No search results for this query
+		{% endif %}
+		{% endif %}
+		{% if artists %}
 	</div>
+
+<div class="container">
+	<nav class="navbar navbar-expand-sm bg-light navbar-light justify-content-center">
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link active" href="{% url 'applausable:highestReviewedSongs' %}">
+					Highest Reviewed Songs
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="{% url 'applausable:all_genre' %}">
+					View Songs By Genre
+				</a>
+			</li>
+		</ul>
+	</nav>
+</div>
+
+<div class="container">
+	{% if request.user.is_superuser %}
+		<a class="nav-link active" href="{% url 'applausable:add_artist' %}">
+			Add an Artist
+		</a>
+	
+	
+	{% endif %}
+	{% else %}
+	
+	<li class="nav-item">There are no artists present.</li>
+	{% endif %}
+</div>
 </div>
 
 <!-- Page 225-226 of book has good bootstrap display for artists and songs when it comes to it-->
