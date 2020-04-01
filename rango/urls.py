@@ -9,6 +9,7 @@ urlpatterns = [
     path('home/specificArtist/<slug:artist_name_slug>/', views.show_artist, name='show_artist'),
     path('home/album/<slug:album_name_slug>/', views.show_album, name='show_album'),
     path('home/song/<slug:song_name_slug>/', views.show_song, name='show_song'),
+    path('user/', views.show_user, name='show_user'),
     path('home/genre/<genre_name>/', views.show_genre, name='show_genre'),
     path('home/allGenres/', views.all_genre, name='all_genre'),
     path('add_artist/', views.add_artist, name='add_artist'),

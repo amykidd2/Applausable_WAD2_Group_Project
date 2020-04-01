@@ -5,13 +5,14 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from rango.models import Artist, Album, Song, Review
+from rango.models import Artist, Album, Song, Review, UserProfile
 from registration.backends.simple.views import RegistrationView
 from rango.bing_search import run_query
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 from django.db.models import Avg
 from django.conf import settings
+from django.contrib.auth.models import User
     
 def home(request):
     artist_list = Artist.objects.all()
@@ -102,6 +103,15 @@ def show_album(request, album_name_slug):
 
     return render(request, 'applausable/album.html', context=context_dict)
 
+@login_required
+def show_user(request):
+    reviews = Review.objects.filter(user=request.user)
+    profile = UserProfile.objects.get(user=request.user)
+    context_dict = {}
+    context_dict['reviews'] = reviews
+    context_dict['user'] = request.user
+    context_dict['profile'] = profile
+    return render(request, 'applausable/user_page.html', context=context_dict)
 
 def show_song(request, song_name_slug):
     context_dict = {}
@@ -122,6 +132,7 @@ def show_song(request, song_name_slug):
         context_dict['link'] = song.linkToSong
         context_dict['reviews'] = reviews
         context_dict['overallScore'] = overallScore
+        context_dict['user'] = request.user
 
     except Category.DoesNotExist:
         context_dict['album'] = None

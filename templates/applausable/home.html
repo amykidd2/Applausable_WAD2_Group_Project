@@ -11,15 +11,14 @@
 <div class='jumbotron jumbotron-fluid'>
 	<div class='container'>
 		{% if user.is_authenticated %}
-		Welcome {{ user.username }}!
-		{{ user.id }}
+		Welcome {{ user.username }}! <a href="{% url 'applausable:show_user'%}">User Page</a>
 		{% else %}
 		<a href="{% url 'registration_register' %}">Sign Up for Applausable</a>
 		{% endif %}
 		</h4>
 		<strong>{{ boldmessage }}</strong>
 	</div>
-
+	
 	<div class='container p-4'>
 		<h4 class="jumbotron-heading">
 			<p>Search Applausable For You Favorite Artists</p>

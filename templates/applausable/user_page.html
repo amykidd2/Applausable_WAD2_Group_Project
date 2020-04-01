@@ -1,0 +1,56 @@
+﻿{% extends 'applausable/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+{{ user.username }}'s Profile
+
+{% endblock %}
+
+{% block body_block %}
+{% if profile.picture %}
+
+
+<img src="{{ MEDIA_URL }}{{ profile.picture }}" width="300" height="300"
+     alt="{{ user.username }}'s profile image" />
+<div>
+    {% endif %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/general.css' %}">
+    <h1 align="center">{{ user.username }}</h1>
+    </br>
+    <h2 align="center"> Your Info: </h2>
+    <div class="comments" align="center" style="padding: 10px;">
+        <p class="font-weight-bold">
+            Your website: <a href={{ profile.website }}>{{ profile.website}}</a>
+            <span class=" text-muted font-weight-normal">
+
+            </span>
+        </p>
+        <p class="font-weight-bold">
+            Your email: {{ user.email }}
+            <span class=" text-muted font-weight-normal">
+
+            </span>
+        </p>
+        </div>
+
+
+        </br>
+        <h2 align="center"> Reviews: </h2>
+        <br />
+
+        {% for review in reviews %}
+        <div class="comments" align="center" style="padding: 10px;">
+            <p class="font-weight-bold">
+                {{ review.songID.title }} {{ review.score }}
+                <span class=" text-muted font-weight-normal">
+
+                </span>
+            </p>
+            {{ review.review | linebreaks }}
+        </div>
+        {% endfor %}
+
+        <br />
+    </div>
+
+    {% endblock %}
