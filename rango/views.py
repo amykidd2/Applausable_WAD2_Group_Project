@@ -13,6 +13,7 @@ from django.db.models import Q
 from django.db.models import Avg
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import user_passes_test
     
 def home(request):
     artist_list = Artist.objects.all()
@@ -148,6 +149,8 @@ def highestReviewedSongs(request):
     context_dict['songs'] = songs
 
     return render(request, 'applausable/highestReviewedSongs.html', context=context_dict)
+
+@user_passes_test(lambda u: u.is_superuser)
 def add_artist(request):
     form = ArtistForm()
     
@@ -165,6 +168,7 @@ def add_artist(request):
 
     return render(request, 'applausable/add_artist.html', context = {'form': form})
 
+@user_passes_test(lambda u: u.is_superuser)
 def add_album(request, artist_name_slug):
     try:
         artist = Artist.objects.get(slug=artist_name_slug)
@@ -195,6 +199,7 @@ def add_album(request, artist_name_slug):
     context_dict = {'form': form, 'artist': artist}
     return render(request, 'applausable/add_album.html', context=context_dict)
 
+@user_passes_test(lambda u: u.is_superuser)
 def add_song(request, album_name_slug):
     try:
         album = Album.objects.get(slug=album_name_slug)
