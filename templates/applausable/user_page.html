@@ -2,55 +2,55 @@
 {% load staticfiles %}
 
 {% block title_block %}
-{{ user.username }}'s Profile
+    {{ user.username }}'s Profile
 
 {% endblock %}
 
 {% block body_block %}
-{% if profile.picture %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/general.css' %}">
 
+<div class="jumbotron">
+    <div class='container'>
+        {% if profile.picture %}
+        <img src="{{ MEDIA_URL }}{{ profile.picture }}" width="300" height="300"
+             alt="{{ user.username }}'s profile image" />
+        {% endif %}
 
-<img src="{{ MEDIA_URL }}{{ profile.picture }}" width="300" height="300"
-     alt="{{ user.username }}'s profile image" />
-<div>
-    {% endif %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/general.css' %}">
-    <h1 align="center">{{ user.username }}</h1>
-    </br>
-    <h2 align="center"> Your Info: </h2>
-    <div class="comments" align="center" style="padding: 10px;">
+        <h1>{{ user.username }}'s Profile Info</h1>
+
+    </div>
+</div>
+
+<div class="container">
+    <div class='comments' align="center" style="padding: 10px;">
         <p class="font-weight-bold">
             Your website: <a href={{ profile.website }}>{{ profile.website}}</a>
-            <span class=" text-muted font-weight-normal">
-
-            </span>
+            <span class=" text-muted font-weight-normal"></span>
         </p>
+        </br>
         <p class="font-weight-bold">
             Your email: {{ user.email }}
-            <span class=" text-muted font-weight-normal">
-
-            </span>
+            <span class=" text-muted font-weight-normal"></span>
         </p>
-        </div>
+    </div>
+</div>
 
-
+<div class='container'>
+    <div class="comments" align="center" style="padding: 10px;">
         </br>
-        <h2 align="center"> Reviews: </h2>
+        <h3> Reviews: </h3>
         <br />
-
         {% for review in reviews %}
         <div class="comments" align="center" style="padding: 10px;">
             <p class="font-weight-bold">
                 {{ review.songID.title }} {{ review.score }}
-                <span class=" text-muted font-weight-normal">
-
-                </span>
+                <span class=" text-muted font-weight-normal"></span>
             </p>
             {{ review.review | linebreaks }}
         </div>
         {% endfor %}
-
         <br />
     </div>
+</div>
 
-    {% endblock %}
+{% endblock %}
