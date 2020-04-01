@@ -4,34 +4,53 @@
 {% block title_block %}
     Song
 
+
 {% endblock %}
 
 {% block body_block %}
-{% if song %}
-{{ song.songImage }}
-<h1>{{ song.title }}</h1>
-From:
-<a href="{% url 'applausable:show_album' album.slug %}">{{ album.albumName }}</a>
-<br />
-{% for review in reviews %}
-{{ review.review }} {{ review.score }}
 
-<br />
+<link rel="stylesheet" type="text/css" href="{% static 'css/general.css' %}">
 
 
-{% endfor %}
-{% if overallScore %}
-    Overall Score:
-    {{overallScore.score__avg}}
-{% endif %}
-<br />
-<a href="{% url 'applausable:add_review' song.slug %}">Write a Review</a>
+<div class="Song-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  {% if song %}
+  <h1 class="display-4">{{ song.title }}</h1>
+  
+  {% if song.artistName %}
+  <a href="{% url 'applausable:show_artist' song.artistID.slug %}">
+  <h4 class="artistname" align="center">by {{ song.artistName }}</h4>
+  </a>
+  {% endif %}
+  <br />
+  <br />
+  {% if overallScore %}
+  <h2 class="overallscore" align="center">Overall Score : {{overallScore.score__avg|floatformat}}/10</h2>
+  {% endif %}
 
+  
+</div>
 
-<p id="demo"></p>
-<div id="player"></div>
+<div class="container">
+  <div class="row">
+  
+    <div class="col">
+	  <a href="{% url 'applausable:show_album' song.albumID.slug %}">
 
-<script id="searcher" link={{link}}>
+      <img src="{{ MEDIA_URL }}{{ song.albumID.albumCover }}"
+         width="400"
+         height="400" alt="Album Cover" />
+         <p>From {{ album.albumName }}</p>
+	  </a>
+	</div>
+  
+    <div class="col">
+      
+	  <p id="demo"></p>
+      <div id="player"></div>
+		
+	  {% if song.linkToSong %}	
+      <script id="searcher" link={{link}}>
+	  
     //2. This code loads the IFrame Player API code asynchronously.
     var script_tag = document.getElementById('searcher')
     var search_term = script_tag.getAttribute("link");
@@ -107,8 +126,51 @@ From:
         });
     }
 </script>
-{% else %}
+		{% else %}
+		<br />
+		<h1>No song found</h1>
+		{% endif %}
+	</div>
+	
+	
+  </div>
+ </div> 
+ 
+ <div class="container">
+  <div class="row">
+  
+
+  
+    <div class="card" style="width: 85rem;">
+  <div class="card-header">
+    Reviews: <br />
+	{% if user.is_authenticated %}
+    <a href="{% url 'applausable:add_review' song.slug %}">Write a Review</a>
+    {% else %}
+    Log in to write a review
+    {% endif %}
+  </div>
+    <ul class="list-group list-group-flush">
+    {% for review in reviews %}
+	<li class="list-group-item">
+	<p class="font-weight-bold">
+	{{ review.user.username }} {{ review.score }}/10:
+	</p>
+	{{ review.review | linebreaks }}</li>
+    {% endfor %}
+  </ul>
+</div>
+ </div>  
+
+	
+  </div>
+  
+
+
+
 <br />
-<h1>No song found</h1>
+
+<br />
+
 {% endif %}
 {% endblock %}
