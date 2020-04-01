@@ -2,12 +2,16 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    {{ user.username }}'s Profile
+{{ user.username }}'s Profile
 
 {% endblock %}
 
 {% block body_block %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/general.css' %}">
+<script type="text/javascript">var email = "{{user.email}}";</script>
+
+<script type="text/javascript" src="{% static 'js/email_button.js' %}"></script>
+
 
 <div class="jumbotron">
     <div class='container'>
@@ -20,7 +24,7 @@
 
     </div>
 </div>
-
+<p align="center"><button onclick="myFunction()">Click To reveal sensitive information</button></p>
 <div class="container">
     <div class='comments' align="center" style="padding: 10px;">
         <p class="font-weight-bold">
@@ -29,12 +33,19 @@
         </p>
         </br>
         <p class="font-weight-bold">
-            Your email: {{ user.email }}
+            <div id="myDIV" class="font-weight-bold">Your email:</div>
             <span class=" text-muted font-weight-normal"></span>
         </p>
     </div>
 </div>
 
+
+
+
+
+<script>
+
+</script>
 <div class='container'>
     <div class="comments" align="center" style="padding: 10px;">
         </br>
