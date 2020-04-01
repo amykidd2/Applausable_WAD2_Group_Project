@@ -12,6 +12,7 @@
 	<div class='container'>
 		{% if user.is_authenticated %}
 		Welcome {{ user.username }}!
+		{{ user.id }}
 		{% else %}
 		<a href="{% url 'registration_register' %}">Sign Up for Applausable</a>
 		{% endif %}

@@ -74,6 +74,7 @@ class Review(models.Model):
     #user = models.ForeignKey(User, on_delete=models.CASCADE) implement later
     songID = models.ForeignKey(Song, on_delete=models.CASCADE)
     score = models.IntegerField(default=0, validators=[MinValueValidator(0),MaxValueValidator(10)])
+    user = models.ForeignKey(User, default = 2, on_delete=models.CASCADE)
 
     def __str__(self): 
         return self.reviewID

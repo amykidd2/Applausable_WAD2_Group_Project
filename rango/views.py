@@ -16,7 +16,9 @@ from django.conf import settings
 def home(request):
     artist_list = Artist.objects.all()
     context_dict = {}
+
     context_dict['artists'] = artist_list
+
     return render(request, 'applausable/home.html', context = context_dict)
 
 def all_genre(request):
@@ -211,6 +213,7 @@ def add_song(request, album_name_slug):
     context_dict = {'form': form, 'album': album}
     return render(request, 'applausable/add_song.html', context=context_dict)
 
+@login_required
 def add_review(request, song_name_slug):
     try:
         song = Song.objects.get(slug=song_name_slug)
@@ -231,6 +234,7 @@ def add_review(request, song_name_slug):
                 review = form.save(commit=False)
                 review.songID = song
                 review.reviewID = previousReview.reviewID + 1
+                review.user = request.user
                 review.save()
                 return redirect(reverse('applausable:show_song',
                 kwargs={'song_name_slug':

@@ -4,22 +4,22 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Applausable.settings')
 import django 
 django.setup() 
 
-from rango.models import Artist, Album, Song, Review
+from rango.models import Artist, Album, Song, Review, User
 
 
 def populate():
 
     comeTogether_review = [
-        {'reviewID': 1111, 'review': 'A classic', 'songID': 1011, 'score': 4}
+        {'reviewID': 1111, 'review': 'A classic', 'songID': 1011, 'score': 4, 'user': 2}
     ]
     letItBe_review = [
-        {'reviewID': 1121, 'review': 'My favourite Beatles song', 'songID': 1021, 'score': 5}
+        {'reviewID': 1121, 'review': 'My favourite Beatles song', 'songID': 1021, 'score': 5, 'user': 2}
     ]
     wonderwall_review = [
-        {'reviewID': 2111, 'review': 'Good but heard it too many times', 'songID': 2011, 'score': 3}
+        {'reviewID': 2111, 'review': 'Good but heard it too many times', 'songID': 2011, 'score': 3, 'user': 2}
     ]
     liveForever_review = [
-        {'reviewID': 2121, 'review': 'Not for me', 'songID': 2021, 'score': 1}
+        {'reviewID': 2121, 'review': 'Not for me', 'songID': 2021, 'score': 1, 'user': 2}
     ]
 
     abbeyRoad_songs = [
@@ -51,6 +51,9 @@ def populate():
         2000 : {'albs': oasis_albs, 'artistName': 'Oasis', 'genre': 'rock', 'description': 'Liam, Noel, Paul, Paul and Tony', 'LinkToSocialMedia': 'https://www.youtube.com/user/oasisinetofficial','artistImage':'oasis.jpg'}
     }
      
+    
+    user = User(username='defaultUserName', email='default_user@gmail.com', password='defaultPassword123')
+    user.save()
     for arts, arts_data in arts.items():
         a = add_artist(arts, arts_data['artistName'], arts_data['genre'], arts_data['description'], arts_data['LinkToSocialMedia'], arts_data['artistImage'])
         for album in arts_data['albs']:
@@ -58,7 +61,7 @@ def populate():
             for song in album['songs']:
                 s = add_song(song['songID'], song['title'], alb, a, song['linkToSong'], song['artistName'], song['overallScore'], song['genre'])
                 for r in song['reviews']:
-                    add_review(r['reviewID'], r['review'], s, r['score'])
+                    add_review(r['reviewID'], r['review'], s, r['score'], user)
     
     
     #Doesn't seem to want to print it out in command line but doesn't effect the actual population        
@@ -66,10 +69,11 @@ def populate():
         #for alb in Album.objects.filter(artistID=a):
             #print(f'- {a}: {alb}')
 
-def add_review(reviewID, review, song, score):
-    r = Review.objects.get_or_create(reviewID=reviewID,songID=song)[0]
+def add_review(reviewID, review, song, score, user):
+    r = Review.objects.get_or_create(reviewID=reviewID,songID=song, user=user)[0]
     r.review=review
     r.score=score
+    r.user = user
     r.save()
     return r
 
