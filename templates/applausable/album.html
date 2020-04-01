@@ -3,22 +3,42 @@
 
 {% block title_block %}
     Album
-
-
-
 {% endblock %}
 
 {% block body_block %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/general.css' %}">
-{% if album %}
 
-<h1>{{ album.albumName }}</h1>
-<img src="{{ MEDIA_URL }}{{ album.albumCover }}" width="300" height="300"
-     alt="{{ artist.artistName }}'s profile image" />
-<div>
+<div class="jumbotron">
+    <div class="text-center">
+        {% if album %}
+            <h1>{{ album.albumName }}</h1>
 
-    <h2> Album Score {{overallScore.overallScore__avg|floatformat}}/10</h2>
-    <h2> Songs: </h2>
+            {% if album.artistName %}
+            <br />
+            <a href="{% url 'applausable:show_artist' album.artistID.slug %}">
+                <h4>by {{ album.artistName }}</h4>
+            </a>
+            {% endif %}
+
+            {% if overallScore %}
+            <br />
+            <h2> Album Score: {{overallScore.overallScore__avg|floatformat}}/10</h2>
+            {% endif %}
+
+        {% else %}
+            <h1>No album found</h1>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container">
+    <img src="{{ MEDIA_URL }}{{ album.albumCover }}" width="300" height="300"
+         alt="{{ artist.artistName }}'s profile image" />
+    <br />
+</div>
+
+<div class="container">
+    <h3> Songs: </h3>
     <ul>
         {% if songs %}
         {% for song in songs %}
@@ -33,14 +53,18 @@
     {% else %}
     <strong>This album has no songs.</strong>
     {% endif %}
-</div>
-{% if request.user.is_superuser %}
-<a href="{% url 'applausable:add_song' album.slug %}">Add Song</a>
-{% endif %}
 
-    {% else %}
-
-<br />
-<h1>No album found</h1>
+    {% if request.user.is_superuser %}
+    <br />
+    <a href="{% url 'applausable:add_song' album.slug %}">Add Song</a>
     {% endif %}
-    {% endblock %}
+</div>
+
+<div class="container">
+    <br />
+    <a href="{% url 'applausable:show_artist' album.artistID.slug %}">
+         <p>Back to Artist Page: {{ artist.artistName }}</p>
+    </a>
+</div>
+
+{% endblock %}

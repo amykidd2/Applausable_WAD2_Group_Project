@@ -13,17 +13,17 @@
 <div class='jumbotron'>
     <div class="Song-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
       {% if song %}
-      <h1 class="display-4">{{ song.title }}</h1>
+      <h1>{{ song.title }}</h1>
       
       {% if song.artistName %}
       <a href="{% url 'applausable:show_artist' song.artistID.slug %}">
-      <h4 class="artistname" align="center">by {{ song.artistName }}</h4>
+      <h4>by {{ song.artistName }}</h4>
       </a>
       {% endif %}
 
       <br />
       {% if overallScore %}
-      <h2 class="overallscore" align="center">Overall Score : {{overallScore.score__avg|floatformat}}/10</h2>
+      <h2>Overall Score : {{overallScore.score__avg|floatformat}}/10</h2>
       {% endif %}
     </div>
 </div>
