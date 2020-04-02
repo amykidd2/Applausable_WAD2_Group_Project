@@ -21,6 +21,8 @@ Homepage
             <a class="nav-link active" href="{% url 'applausable:show_song' song.slug %}">
                 {{ song.title }}</a> with a score of {{song.overallScore}}
             {% endfor %}
+    {% else %}
+    No songs availble
     {% endif %}
 </div>
 
