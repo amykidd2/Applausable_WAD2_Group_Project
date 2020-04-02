@@ -66,7 +66,7 @@
 					<h4>{{ song.title }}</h4> 
 					<h5 class="card-subtitle mb-2 text-muted">by {{song.artistName}}</h5>
 					<p class="card-text">This song recieved a score of {{song.overallScore}}.</p>
-					<a href="{% url 'applausable:show_song' song.slug %}" class="card-link">More about this song</a>
+					<a href="{% url 'applausable:show_song' song.slug %}" class="card-link">Learn More and Review</a>
 				{% endfor %}
 			{% endif %}  
 		</div>

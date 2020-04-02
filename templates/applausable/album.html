@@ -11,18 +11,9 @@
 <div class="jumbotron">
     <div class="text-center">
         {% if album %}
-            <h1>{{ album.albumName }}</h1>
-
-            {% if album.artistName %}
-            <br />
-            <a href="{% url 'applausable:show_artist' album.artistID.slug %}">
-                <h4>by {{ album.artistName }}</h4>
-            </a>
-            {% endif %}
-
             {% if overallScore %}
             <br />
-            <h2> Album Score: {{overallScore.overallScore__avg|floatformat}}/10</h2>
+            <h2> Overall Album Score: {{overallScore.overallScore__avg|floatformat}}/10</h2>
             {% endif %}
 
         {% else %}
@@ -32,43 +23,40 @@
 </div>
 
 <div class="container">
-    <img src="{{ MEDIA_URL }}{{ album.albumCover }}" width="300" height="300"
-         alt="{{ artist.artistName }}'s profile image" />
+    <div class="card">
+        <img src="{{ MEDIA_URL }}{{ album.albumCover }}" class="card-img-top" alt="{{ artist.artistName }}'s profile image">
+        <div class="card-body">
+          <h4 class="card-title">{{ album.albumName }}</h4>
+          <br />
+          <h5> Songs: </h5>
+          <ul>
+              {% if songs %}
+              {% for song in songs %}
+              {% ifequal album.albumName song.albumID.albumName %}
+          
+          
+              <li><a href="{% url 'applausable:show_song' song.slug %}">{{ song.title }}</a></li>
+              {% endifequal %}
+              {% endfor %}
+          
+          </ul>
+          {% else %}
+          <strong>This album has no songs.</strong>
+          {% endif %}
+          
+          {% if request.user.is_superuser %}
+          <br />
+          <a href="{% url 'applausable:add_song' album.slug %}">Add Song</a>
+          {% endif %}
+        </div>
+    </div>
     <br />
 </div>
 
 <div class="container">
-    <h3> Songs: </h3>
-    <ul>
-        {% if songs %}
-        {% for song in songs %}
-        {% ifequal album.albumName song.albumID.albumName %}
-
-
-        <li><a href="{% url 'applausable:show_song' song.slug %}">{{ song.title }}</a></li>
-        {% endifequal %}
-        {% endfor %}
-
-    </ul>
-    {% else %}
-    <strong>This album has no songs.</strong>
-    {% endif %}
-
-    {% if request.user.is_superuser %}
     <br />
-    <a href="{% url 'applausable:add_song' album.slug %}">Add Song</a>
-    {% endif %}
-</div>
-
-<div class="container" align="center">
-    <br />
-
     <a href="{% url 'applausable:show_artist' album.artistID.slug %}">
-
-        <img src="{{ MEDIA_URL }}{{ album.artistID.artistImage }}"
-             width="250"
-             height="250" alt="Artist Image" />
-        <p align="center">Back to Artist: {{ album.artistID.artistName }}</p>
+        <p>Back to Artist: {{ album.artistID.artistName }}</p>
     </a>
 </div>
 

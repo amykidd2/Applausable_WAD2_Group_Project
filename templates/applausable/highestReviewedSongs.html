@@ -15,7 +15,7 @@ Homepage
 </div>
 
 
-<div class="container">
+<div class="container-fluid">
 <table class="table table-hover">
   <thead>
     <tr>
@@ -34,7 +34,7 @@ Homepage
         <td>{{ song.title }}</td>
         <td>{{ song.artistName }}</td>
         <td>{{ song.overallScore }}</td>
-        <td><a class="nav-link active" href="{% url 'applausable:show_song' song.slug %}">Learn More</a> </td>
+        <td><a class="nav-link active" href="{% url 'applausable:show_song' song.slug %}">Learn More and Review</a> </td>
     </tr>
     {% endfor %}
 {% else %}

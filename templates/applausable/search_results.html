@@ -22,11 +22,12 @@
                 {% for result in results %}
                 <td align="center">
                     <a href="{% url 'applausable:show_artist' result.slug %}">
-    
-                        <img src="{{ MEDIA_URL }}{{ result.artistImage }}"
-                             width="200"
-                             height="200" alt="Artist Image" />
-                        <div class='p-1'><p>{{ result.artistName }}</p></div>
+                        <div class="card">
+                            <img src="{{ MEDIA_URL }}{{ result.artistImage }}" class="card-img-top" alt="artist profile image">
+                            <div class="card-body">
+                              <h5 class="card-title">{{ result.artistName }}</h5>
+                            </div>
+                        </div>
                     </a>
                 </td>
                 {% if not forloop.last and forloop.counter|divisibleby:3 %}

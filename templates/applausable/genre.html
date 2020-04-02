@@ -12,8 +12,8 @@
     <div class="jumbotron">
         <h2 algin='center'> Top 10 Songs in this genre: </h2>
     </div>
-        <div class="container">  
 
+    <div class="container-fluid">  
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -31,12 +31,12 @@
                     <td>{{ song.title }}</td>
                     <td>{{ song.artistName }}</td>
                     <td>{{ song.overallScore }}</td>
-                    <td><a class="nav-link active" href="{% url 'applausable:show_song' song.slug %}">Learn More</a> </td>
+                    <td><a class="nav-link active" href="{% url 'applausable:show_song' song.slug %}">Learn More and Review</a> </td>
                 </tr>
                 {% endfor %}
               </tbody>
             </table>
-        </div>
+    </div>
 {% else %}
 <br />
 <h1>No songs found</h1>

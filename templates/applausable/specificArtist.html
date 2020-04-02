@@ -8,17 +8,17 @@
 {% block body_block %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/general.css' %}">
 
-<div class="jumbotron jumboron-fluid">
-    {% if artist %}
-    <h1 align="center">{{ artist.artistName }}</h1>
-</div>
-
 <div class="container">
-    <img src="{{ MEDIA_URL }}{{ artist.artistImage }}"
-         width="300"
-         height="300"
-         alt="{{ artist.artistName }}'s profile image" />
-         <br />
+    {% if artist %}
+    <br />
+    <div class="card">
+        <img src="{{ MEDIA_URL }}{{ artist.artistImage }}" class="card-img-top" alt="{{ artist.artistName }}'s profile image">
+        <div class="card-body">
+          <h5 class="card-title">{{ artist.artistName }}</h5>
+          <p class="card-text">{{ artist.description }}</p>
+        </div>
+    </div>
+        <br />
 </div>
 
 <div class="container">
