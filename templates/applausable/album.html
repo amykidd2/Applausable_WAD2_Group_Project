@@ -60,10 +60,15 @@
     {% endif %}
 </div>
 
-<div class="container">
+<div class="container" align="center">
     <br />
+
     <a href="{% url 'applausable:show_artist' album.artistID.slug %}">
-         <p>Back to Artist Page: {{ artist.artistName }}</p>
+
+        <img src="{{ MEDIA_URL }}{{ album.artistID.artistImage }}"
+             width="250"
+             height="250" alt="Artist Image" />
+        <p align="center">Album by {{ album.artistID.artistName }}</p>
     </a>
 </div>
 
