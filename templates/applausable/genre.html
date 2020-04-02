@@ -27,7 +27,7 @@
               <tbody>
                 {% for song in songs %}
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">{{ forloop.counter }}</th>
                     <td>{{ song.title }}</td>
                     <td>{{ song.artistName }}</td>
                     <td>{{ song.overallScore }}</td>
