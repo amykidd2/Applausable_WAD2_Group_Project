@@ -11,22 +11,22 @@
 <div class="jumbotron">
     <div class="text-center">
         {% if album %}
-            <h1>{{ album.albumName }}</h1>
+        <h1>{{ album.albumName }}</h1>
 
-            {% if album.artistName %}
-            <br />
-            <a href="{% url 'applausable:show_artist' album.artistID.slug %}">
-                <h4>by {{ album.artistName }}</h4>
-            </a>
-            {% endif %}
+        {% if album.artistName %}
+        <br />
+        <a href="{% url 'applausable:show_artist' album.artistID.slug %}">
+            <h4>by {{ album.artistName }}</h4>
+        </a>
+        {% endif %}
 
-            {% if overallScore %}
-            <br />
-            <h2> Album Score: {{overallScore.overallScore__avg|floatformat}}/10</h2>
-            {% endif %}
+        {% if overallScore %}
+        <br />
+        <h2> Album Score: {{overallScore.overallScore__avg|floatformat}}/10</h2>
+        {% endif %}
 
         {% else %}
-            <h1>No album found</h1>
+        <h1>No album found</h1>
         {% endif %}
     </div>
 </div>
@@ -38,26 +38,37 @@
 </div>
 
 <div class="container">
-    <h3> Songs: </h3>
-    <ul>
-        {% if songs %}
-        {% for song in songs %}
-        {% ifequal album.albumName song.albumID.albumName %}
-
-
-        <li><a href="{% url 'applausable:show_song' song.slug %}">{{ song.title }}</a></li>
-        {% endifequal %}
-        {% endfor %}
-
-    </ul>
-    {% else %}
-    <strong>This album has no songs.</strong>
-    {% endif %}
-
-    {% if request.user.is_superuser %}
-    <br />
-    <a href="{% url 'applausable:add_song' album.slug %}">Add Song</a>
-    {% endif %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Song</th>
+                <th scope="col">Artist</th>
+                <th scope="col">Score</th>
+                <th scope="col">Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if songs %}
+            {% for song in songs %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ song.title }}</td>
+                <td>{{ song.artistName }}</td>
+                <td>{{ song.overallScore }}</td>
+                <td><a class="nav-link active" href="{% url 'applausable:show_song' song.slug %}">Learn More</a> </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            This album has no songs.
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+        {% if request.user.is_superuser %}
+<br />
+<a href="{% url 'applausable:add_song' album.slug %}">Add Song</a>
+        {% endif %}
 </div>
 
 <div class="container" align="center">
