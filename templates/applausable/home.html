@@ -23,9 +23,9 @@
 <div class='jumbotron jumbotron-fluid'>
 	
 	<div class='container p-4'>
-		<h4 class="jumbotron-heading">
-			<p>Search Applausable For You Favorite Artists</p>
-		</h4>
+		<h1 class="jumbotron-heading px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center ">
+			Search Applausable For You Favorite Artists
+		</h1>
 		<form action="{% url 'applausable:search_results' %}" method="GET" value="{{request.GET.q}}">
 			<input type="text" name="q" value="{{request.GET.q}}" placeholder="Search Artists" />	
 		</form>
@@ -55,14 +55,15 @@
 	</div>
 </div>
 
-<div class="container-fluid text-center">
+<div class="container">
 	<div class="card text-center">
 		<div class="card-header">
-			Current Top Reviewed Song:
+			<h3>Current Top Reviewed Song:</h3>
 		</div>
 		<div class="card-body">
 			{% if songs %}
 				{% for song in songs %}
+					<img src="{{ MEDIA_URL }}{{ song.albumID.albumCover }}" width="400" height="400" alt="{{ song.artistName }}">
 					<h4>{{ song.title }}</h4> 
 					<h5 class="card-subtitle mb-2 text-muted">by {{song.artistName}}</h5>
 					<p class="card-text">This song recieved a score of {{song.overallScore}}.</p>
@@ -72,8 +73,15 @@
 		</div>
 	</div>
 	<br />
+</div>
+
+<div class="container" allign="centre">
+	<div class="row justify-content-md-center">
+	<div class="col-md-auto">
 	<a href="{% url 'applausable:highestReviewedSongs' %}" class="btn btn-primary">View our song ranking</a>
 	<a href="{% url 'applausable:all_genre' %}" class="btn btn-primary">View our song ranking by genre</a>
+	</div>
+	</div>
 </div>
 
 <div class="container">
