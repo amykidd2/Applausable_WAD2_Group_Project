@@ -12,19 +12,19 @@
 
 <div class='jumbotron'>
     <div class="Song-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      {% if song %}
-      <h1>{{ song.title }}</h1>
-      
-      {% if song.artistName %}
-      <a href="{% url 'applausable:show_artist' song.artistID.slug %}">
-      <h4>by {{ song.artistName }}</h4>
-      </a>
-      {% endif %}
+        {% if song %}
+        <h1>{{ song.title }}</h1>
 
-      <br />
-      {% if overallScore %}
-      <h2>Overall Score : {{overallScore.score__avg|floatformat}}/10</h2>
-      {% endif %}
+        {% if song.artistName %}
+        <a href="{% url 'applausable:show_artist' song.artistID.slug %}">
+            <h4>by {{ song.artistName }}</h4>
+        </a>
+        {% endif %}
+
+        <br />
+        {% if overallScore %}
+        <h2>Overall Score : {{overallScore.score__avg|floatformat}}/10</h2>
+        {% endif %}
     </div>
 </div>
 
@@ -40,112 +40,120 @@
                     <p class="font-weight-bold">
                         {{ review.user.username }} {{ review.score }}/10:
                     </p>
-                    {{ review.review | linebreaks }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <br />
-            {% if user.is_authenticated %}
-                <a href="{% url 'applausable:add_review' song.slug %}">Write a Review</a>
-            {% else %}
-                Please log in to write a review
-            {% endif %}
+                    {{ review.review | linebreaks }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <br />
+        {% if user.is_authenticated %}
+        <a href="{% url 'applausable:add_review' song.slug %}">Write a Review</a>
+        {% else %}
+        Please log in to write a review
+        {% endif %}
     </div>
 </div>
+<hr />
+<h2 align="center">Watch The Music Video</h2>
 
-<div class='container'>
+<div class='container' align="center">
     <p id="demo"></p>
     <div id="player"></div>
-      
-    {% if song.linkToSong %}	
+
+    {% if song.linkToSong %}
     <script id="searcher" link={{link}}>
-    
-    //2. This code loads the IFrame Player API code asynchronously.
-    var script_tag = document.getElementById('searcher')
-    var search_term = script_tag.getAttribute("link");
-    
-    var tag = document.createElement('script');
-    
-    tag.src = "https://www.youtube.com/iframe_api";
-    
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    var link = document.getElementsByTagName('link')[0];
-    link.parentNode.insertBefore(tag, link);
-    // 3. This function creates an <iframe> (and YouTube player)
-    //    after the API code downloads.
-    var player;
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player', {
-          height: '390',
-          width: '640',
-          videoId: 'M7lc1UVf-VE',
-          events: {
-              'onReady': onPlayerReady,
-              'onStateChange': onPlayerStateChange
-          }
-      });
-    }
-    
-    // 4. The API will call this function when the video player is ready.
-    function onPlayerReady(event) {
-      event.target.playVideo();
-    }
-    
-    // 5. The API calls this function when the player's state changes.
-    //    The function indicates that when playing a video (state=1),
-    //    the player should play for six seconds and then stop.
-    var done = false;
-    function onPlayerStateChange(event) {
-      if (event.data == YT.PlayerState.PLAYING && !done) {
-          setTimeout(stopVideo, 0);
-          done = true;
-      }
-    }
-    function youtube_parser(url) {
-      var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-      var match = url.match(regExp);
-      return (match && match[7].length == 11) ? match[7] : false;
-    }
-    function YouTubeGetID(url) {
-      var ID = '';
-      url = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-      if (url[2] !== undefined) {
-          ID = url[2].split(/[^0-9a-z_\-]/i);
-          ID = ID[0];
-      }
-      else {
-          ID = url;
-      }
-      return ID;
-    }
-    function stopVideo() {
-      player.stopVideo();
-    }
-    var player;
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player', {
-          height: '390',
-          width: '640',
-          videoId: youtube_parser(search_term),
-          events: {
-              'onReady': onPlayerReady,
-              'onStateChange': onPlayerStateChange
-          }
-      });
-    }
+
+        //2. This code loads the IFrame Player API code asynchronously.
+        var script_tag = document.getElementById('searcher')
+        var search_term = script_tag.getAttribute("link");
+
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        var link = document.getElementsByTagName('link')[0];
+        link.parentNode.insertBefore(tag, link);
+        // 3. This function creates an <iframe> (and YouTube player)
+        //    after the API code downloads.
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '390',
+                width: '640',
+                videoId: 'M7lc1UVf-VE',
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        // 4. The API will call this function when the video player is ready.
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        // 5. The API calls this function when the player's state changes.
+        //    The function indicates that when playing a video (state=1),
+        //    the player should play for six seconds and then stop.
+        var done = false;
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING && !done) {
+                setTimeout(stopVideo, 0);
+                done = true;
+            }
+        }
+        function youtube_parser(url) {
+            var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+            var match = url.match(regExp);
+            return (match && match[7].length == 11) ? match[7] : false;
+        }
+        function YouTubeGetID(url) {
+            var ID = '';
+            url = url.replace(/(>|<)/gi, '').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+            if (url[2] !== undefined) {
+                ID = url[2].split(/[^0-9a-z_\-]/i);
+                ID = ID[0];
+            }
+            else {
+                ID = url;
+            }
+            return ID;
+        }
+        function stopVideo() {
+            player.stopVideo();
+        }
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '390',
+                width: '640',
+                videoId: youtube_parser(search_term),
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
     </script>
-      {% else %}
-      <br />
-      <h1>No song found</h1>
-      {% endif %}
-    </div>
+    {% else %}
+    <br />
+    <h1>No song found</h1>
+    {% endif %}
 </div>
+</div>
+<hr />
 
 <div class='container'>
     <br />
     <a href="{% url 'applausable:show_album' song.albumID.slug %}">
-         <p>Back to Album Page: {{ album.albumName }}</p>
+
+        <img src="{{ MEDIA_URL }}{{ song.albumID.albumCover }}"
+             width="250"
+             height="250" alt="Album Cover" />
+        <p align="center">Back to Album: {{ song.albumID.albumName }}</p>
     </a>
 </div>
 

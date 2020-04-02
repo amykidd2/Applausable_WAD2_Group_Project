@@ -20,13 +20,15 @@
              alt="{{ user.username }}'s profile image" />
         {% endif %}
 
-        <h1>{{ user.username }}'s Profile Info</h1>
+        <h1>{{ user.username }}'s Profile</h1>
 
     </div>
 </div>
-<p align="center"><button onclick="myFunction()">Click To reveal sensitive information</button></p>
+
+
 <div class="container">
-    <div class='comments' align="center" style="padding: 10px;">
+    <p align="left"><button type="button" class="btn btn-outline-secondary" onclick="myFunction()">Click To reveal sensitive information</button></p>
+	<div class='comments' align="left" style="padding: 10px;">
         <p class="font-weight-bold">
             Your website: <a href={{ profile.website }}>{{ profile.website}}</a>
             <span class=" text-muted font-weight-normal"></span>
@@ -42,22 +44,32 @@
 <script>
 
 </script>
-<div class='container'>
-    <div class="comments" align="center" style="padding: 10px;">
-        </br>
-        <h3> Reviews: </h3>
-        <br />
-        {% for review in reviews %}
-        <div class="comments" align="center" style="padding: 10px;">
-            <p class="font-weight-bold">
-                {{ review.songID.title }} {{ review.score }}
-                <span class=" text-muted font-weight-normal"></span>
-            </p>
-            {{ review.review | linebreaks }}
-        </div>
-        {% endfor %}
-        <br />
+<div class="container">
+    <div class="row">
+        <div class="card" style="width: 85rem;">
+            <div class="card-header">
+                Reviews:
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for review in reviews %}
+                <li class="list-group-item">
+                    <p class="font-weight-bold">
+					    
+						<a  href="{% url 'applausable:show_song' review.songID.slug %}">
+						{{ review.songID.title }} </a>
+						({{ review.score }}/10): <br />
+						By <a  href="{% url 'applausable:show_artist' review.songID.artistID.slug %}">
+						 {{ review.songID.artistName }} </a>
+
+                    </p>
+                    {{ review.review | linebreaks }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <br />
+
     </div>
 </div>
+
 
 {% endblock %}
