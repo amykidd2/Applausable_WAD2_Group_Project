@@ -7,7 +7,7 @@ class ArtistForm(forms.ModelForm):
     artistID = forms.IntegerField(widget=forms.HiddenInput(), initial=0000)
     artistName = forms.CharField(max_length=128, help_text='Enter artist name.')
     genre = forms.CharField(max_length=128, help_text='Enter genre.')
-    description = forms.CharField(max_length=248, help_text='Enter your artist description.')
+    description = forms.CharField(widget=forms.Textarea, max_length=248, help_text='Enter your artist description.')
     LinkToSocialMedia = forms.URLField(help_text='Enter your social media link.')
     artistImage = forms.ImageField(help_text='Upload image of said artist here')
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
@@ -16,7 +16,10 @@ class ArtistForm(forms.ModelForm):
         model = Artist
         
         fields = ('artistName', 'genre', 'description', 'LinkToSocialMedia', 'artistImage' )
-
+    def __init__(self, *args, **kwargs):
+       super(ArtistForm, self).__init__(*args, **kwargs) # Call to ModelForm constructor
+       self.fields['description'].widget.attrs['cols'] = 80
+       self.fields['description'].widget.attrs['rows'] = 5
 class AlbumForm(forms.ModelForm):
     #albumID = forms.IntegerField(widget=forms.HiddenInput(), initial=0000) #this doesnt work for some reason it just makes it 0 rather than increasing it.
     albumName = forms.CharField(max_length=128, help_text='Enter the album name')
@@ -74,7 +77,7 @@ class SongForm(forms.ModelForm):
 
 class ReviewForm(forms.ModelForm):
 
-    review = forms.CharField(max_length=248, help_text='Enter your review')
+    review = forms.CharField(widget=forms.Textarea, max_length=248, help_text='Enter your review')
     score = forms.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(10)], initial=0, help_text='Enter your score')
     class Meta:
         # Provide an association between the ModelForm and a model
@@ -88,6 +91,11 @@ class ReviewForm(forms.ModelForm):
         exclude = ('songID','reviewID', 'user')
 # or specify the fields to include (don't include the category field).
 #fields = ('title', 'url', 'views')
+    def __init__(self, *args, **kwargs):
+        super(ReviewForm, self).__init__(*args, **kwargs) # Call to ModelForm constructor
+        self.fields['review'].widget.attrs['cols'] = 80
+        self.fields['review'].widget.attrs['rows'] = 5
+        
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
