@@ -21,7 +21,6 @@ urlpatterns = [
     #path('home/login/', views.login, name='login'),
     #path('home/signup/', views.signup, name='signup'),
     path('register_profile/', views.register_profile, name='register_profile'),
-    path('search/', views.search, name='search'),
     path('searchResults/', views.SearchResultsView, name='search_results'),
     path('highestReviewedSongs/', views.highestReviewedSongs, name='highestReviewedSongs'),
 ]

@@ -7,7 +7,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from rango.models import Artist, Album, Song, Review, UserProfile
 from registration.backends.simple.views import RegistrationView
-from rango.bing_search import run_query
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 from django.db.models import Avg
@@ -327,16 +326,7 @@ class MyRegistrationView(RegistrationView):
     def get_success_url(self, user):
         return '/home/' 
 
-def search(request):
-    result_list = []
-    
-    if request.method == 'POST':
-        query = request.POST['query'].strip() 
-        if query: 
-            # Run our Bing function to get the results list! 
-            result_list = run_query(query)
 
-    return render(request, 'applausable/search.html', {'result_list': result_list})
 
 @login_required
 def register_profile(request):
