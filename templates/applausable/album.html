@@ -11,13 +11,8 @@
 <div class="jumbotron">
     <div class="text-center">
         {% if album %}
-<<<<<<< HEAD
-            {% if overallScore %}
-            <br />
-            <h2> Overall Album Score: {{overallScore.overallScore__avg|floatformat}}/10</h2>
-            {% endif %}
-=======
         <h1>{{ album.albumName }}</h1>
+	
 
         {% if album.artistName %}
         <br />
@@ -30,7 +25,7 @@
         <br />
         <h2> Album Score: {{overallScore.overallScore__avg|floatformat}}/10</h2>
         {% endif %}
->>>>>>> b6021f159e57ebc30a9fcbf531c62b8e993e9ecb
+
 
         {% else %}
         <h1>No album found</h1>
@@ -70,9 +65,9 @@
 </div>
 
 <div class="container">
-<<<<<<< HEAD
+
     <br />
-=======
+
     <table class="table table-hover">
         <thead>
             <tr>
@@ -109,7 +104,6 @@
 <div class="container" align="center">
     <br />
 
->>>>>>> b6021f159e57ebc30a9fcbf531c62b8e993e9ecb
     <a href="{% url 'applausable:show_artist' album.artistID.slug %}">
         <p>Back to Artist: {{ album.artistID.artistName }}</p>
     </a>
