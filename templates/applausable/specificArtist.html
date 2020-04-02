@@ -46,9 +46,9 @@
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{ mSong.title }}</td>
-                <td>{{ mSong.albumName }}</td>
+                <td>{{ mSong.albumID.albumName }}</td>
                 <td>{{ mSong.overallScore }}</td>
-                <td><a class="nav-link active" href="{% url 'applausable:show_song' mSong.slug %}">Learn More</a> </td>
+                <td><a class="nav-link active" href="{% url 'applausable:show_song' mSong.slug %}">Song Page</a> </td>
             </tr>
             {% endfor %}
             {% else %}
