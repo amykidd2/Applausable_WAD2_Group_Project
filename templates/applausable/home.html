@@ -7,6 +7,7 @@
 
 {% block body_block %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
+
 <!--
 	<div class='container'>
 		
@@ -80,6 +81,7 @@
 	<div class="col-md-auto">
 	<a href="{% url 'applausable:highestReviewedSongs' %}" class="btn btn-primary">View our song ranking</a>
 	<a href="{% url 'applausable:all_genre' %}" class="btn btn-primary">View our song ranking by genre</a>
+	<a href="{% url 'applausable:artist' %}" class="btn btn-primary">View all Artists</a>
 	</div>
 	</div>
 </div>
