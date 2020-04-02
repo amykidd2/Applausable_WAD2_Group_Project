@@ -7,19 +7,7 @@
 
 {% block body_block %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/general.css' %}">
-<div class="jumbotron">
-    <div class="text-center">
-        {% if artist %}
 
-        <h1>{{ artist.artistName }}</h1>
-
-
-
-        {% else %}
-        <h1>No Artist Found</h1>
-        {% endif %}
-    </div>
-</div>
 <div class="container">
     {% if artist %}
     <br />
@@ -35,7 +23,7 @@
 
 <div class="container">
     {% if mostPopularSongs %}
-        <h2> Top Songs from this Artist: </h2>
+        <h2 align="center"> Top Songs from this Artist: </h2>
         {% for mSong in mostPopularSongs %}
         <div class="comments" align="center" style="padding: 10px;">
             <p class="font-weight-bold">
@@ -52,23 +40,23 @@
 
 <div class='container'>
     <p id="test"></p>
-
-    <h2> Albums: </h2>
-
+    
+    <h2 align="center"> Albums: </h2>
+    
     <div class="img-with-text"></div>
     <table width="150" border="0" cellpadding="5" align="center">
         <tr>
             {% for album in albums %}
-
+    
             <td align="center">
                 <a href="{% url 'applausable:show_album' album.slug %}">
-
+    
                     <img src="{{ MEDIA_URL }}{{ album.albumCover }}"
                          width="250"
                          height="250" alt="Album Cover" />
                     <p>{{ album.albumName }}</p>
                 </a>
-
+    
             </td>
             {% if not forloop.last and forloop.counter|divisibleby:3 %}
         </tr>
@@ -78,15 +66,19 @@
         </tr>
     </table>
 
-    {% if request.user.is_superuser %}
-    <br />
-    <div align="center">
+
+	{% if request.user.is_superuser %}
+        <br />
         <a href="{% url 'applausable:add_album' artist.slug %}">Add Album</a><br />
-    </div>
     {% endif %}
 
 </div>
 
-
+<div class="container">
+    <br />
+    <a href="{% url 'home' %}">
+         <p>Back to Home Page</p>
+    </a>
+</div>
 
 {% endblock %}
