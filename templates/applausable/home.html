@@ -7,8 +7,7 @@
 
 {% block body_block %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
-
-<div class='jumbotron jumbotron-fluid'>
+<!--
 	<div class='container'>
 		
 		{% if user.is_authenticated %}
@@ -19,6 +18,9 @@
 		</h4>
 		<strong>{{ boldmessage }}</strong>
 	</div>
+-->
+
+<div class='jumbotron jumbotron-fluid'>
 	
 	<div class='container p-4'>
 		<h4 class="jumbotron-heading">
@@ -51,22 +53,27 @@
 		{% endif %}
 		{% if artists %}
 	</div>
+</div>
 
-<div class="container">
-	<nav class="navbar navbar-expand-sm bg-light navbar-light justify-content-center">
-		<ul class="navbar-nav">
-			<li class="nav-item">
-				<a class="nav-link active" href="{% url 'applausable:highestReviewedSongs' %}">
-					Highest Reviewed Songs
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link active" href="{% url 'applausable:all_genre' %}">
-					View Songs By Genre
-				</a>
-			</li>
-		</ul>
-	</nav>
+<div class="container-fluid text-center">
+	<div class="card text-center">
+		<div class="card-header">
+			Current Top Reviewed Song:
+		</div>
+		<div class="card-body">
+			{% if songs %}
+				{% for song in songs %}
+					<h4>{{ song.title }}</h4> 
+					<h5 class="card-subtitle mb-2 text-muted">by {{song.artistName}}</h5>
+					<p class="card-text">This song recieved a score of {{song.overallScore}}.</p>
+					<a href="{% url 'applausable:show_song' song.slug %}" class="card-link">More about this song</a>
+				{% endfor %}
+			{% endif %}  
+		</div>
+	</div>
+	<br />
+	<a href="{% url 'applausable:highestReviewedSongs' %}" class="btn btn-primary">View our song ranking</a>
+	<a href="{% url 'applausable:all_genre' %}" class="btn btn-primary">View our song ranking by genre</a>
 </div>
 
 <div class="container">
@@ -81,7 +88,6 @@
 	
 	<li class="nav-item">There are no artists present.</li>
 	{% endif %}
-</div>
 </div>
 
 <!-- Page 225-226 of book has good bootstrap display for artists and songs when it comes to it-->

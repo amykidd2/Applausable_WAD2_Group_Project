@@ -17,9 +17,12 @@ from django.contrib.auth.decorators import user_passes_test
     
 def home(request):
     artist_list = Artist.objects.all()
+    songs = Song.objects.order_by('-overallScore')[:1]
+
     context_dict = {}
 
     context_dict['artists'] = artist_list
+    context_dict['songs'] = songs
 
     return render(request, 'applausable/home.html', context = context_dict)
 
@@ -59,7 +62,11 @@ def artist(request):
     return render(request, 'applausable/artist.html', context=context_dict)
 
 def album(request):
-    return render(request, 'applausable/album.html')    
+    artist_list = Artist.objects.all()
+    context_dict = {}
+    context_dict['artists'] = artist_list
+
+    return render(request, 'applausable/album.html', context=context_dict)    
 
 def show_artist(request, artist_name_slug):
     context_dict = {}
