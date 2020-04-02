@@ -12,7 +12,7 @@ class Artist(models.Model):
     description = models.CharField(max_length=248, default='Description')
     LinkToSocialMedia = models.URLField(default='Link') #sorry I made it a capital L but now I've done too much to change it back
     #slug = models.SlugField(unique=True, )
-    artistImage = models.ImageField(upload_to= settings.MEDIA_DIR,default='artist.jpg')
+    artistImage = models.ImageField(upload_to= 'artist_images/',default='artist.jpg')
     slug = models.SlugField(unique=True, default=uuid.uuid1)
 
     def save(self, *args, **kwargs):
