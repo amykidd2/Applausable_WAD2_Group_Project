@@ -10,10 +10,16 @@ from rango.models import Artist, Album, Song, Review, User
 def populate():
 
     comeTogether_review = [
-        {'reviewID': 1111, 'review': 'A classic', 'songID': 1011, 'score': 4, 'user': 2}
+        {'reviewID': 1111, 'review': 'A classic', 'songID': 1011, 'score': 4, 'user': 2},
+        {'reviewID': 1221, 'review': 'Good but reminds me of my ex boyfriend', 'songID': 1021, 'score': 3, 'user': 2}
+    ]
+    hereComes_review = [
+        {'reviewID': 1112, 'review': 'Cured my depression', 'songID': 1012, 'score': 5, 'user': 2},
+        {'reviewID': 1212, 'review': 'My fave ever', 'songID': 1012, 'score': 5, 'user': 2}
     ]
     letItBe_review = [
-        {'reviewID': 1121, 'review': 'My favourite Beatles song', 'songID': 1021, 'score': 5, 'user': 2}
+        {'reviewID': 1121, 'review': 'My favourite Beatles song', 'songID': 1021, 'score': 5, 'user': 2},
+        {'reviewID': 1211, 'review': 'Not for me', 'songID': 1011, 'score': 2, 'user': 2}
     ]
     wonderwall_review = [
         {'reviewID': 2111, 'review': 'Good but heard it too many times', 'songID': 2011, 'score': 3, 'user': 2}
@@ -23,7 +29,8 @@ def populate():
     ]
 
     abbeyRoad_songs = [
-        {'songID': 1011, 'title': 'Come Together', 'albumID':1010,'artistName':'The Beatles', 'artistID': 1000, 'linkToSong':'https://www.youtube.com/watch?v=45cYwDMibGo', 'reviews': comeTogether_review, 'overallScore' : 4, 'genre' : 'Pop'}
+        {'songID': 1011, 'title': 'Come Together', 'albumID':1010,'artistName':'The Beatles', 'artistID': 1000, 'linkToSong':'https://www.youtube.com/watch?v=45cYwDMibGo', 'reviews': comeTogether_review, 'overallScore' : 4, 'genre' : 'Pop'},
+        {'songID': 1012, 'title': 'Here Comes The Sun', 'albumID':1010,'artistName':'The Beatles', 'artistID': 1000, 'linkToSong':'https://www.youtube.com/watch?v=xUNqsfFUwhY', 'reviews': hereComes_review, 'overallScore' : 5, 'genre' : 'Pop'}
         ]
     letItBe_songs = [
         {'songID': 1021, 'title': 'Let It Be', 'albumID':1020,'artistName':'The Beatles', 'artistID': 1000, 'linkToSong':'https://www.youtube.com/watch?v=QDYfEBY9NM4', 'reviews': letItBe_review, 'overallScore' : 5, 'genre' : 'Pop'}

@@ -10,13 +10,7 @@
 <div class="jumbotron">
     <div class="text-center">
         {% if artist %}
-
         <h1>{{ artist.artistName }}</h1>
-
-
-     
-
-
         {% else %}
         <h1>No artist found</h1>
         {% endif %}
@@ -35,18 +29,33 @@
         <br />
 </div>
 
-<div class="container">
-    {% if mostPopularSongs %}
-        <h2 align="center"> Top Songs from this Artist: </h2>
-        {% for mSong in mostPopularSongs %}
-        <div class="comments" align="center" style="padding: 10px;">
-            <p class="font-weight-bold">
-                <a href="{% url 'applausable:show_song' mSong.slug %}">{{ mSong.title }}</a>
-                <span class=" text-muted font-weight-normal"></span>
-            </p>
-        </div>
-        {% endfor %}
-    {% endif %}
+<div class="container-fluid">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Song</th>
+                <th scope="col">Album</th>
+                <th scope="col">Score</th>
+                <th scope="col">Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if  mostPopularSongs %}
+            {% for mSong in mostPopularSongs %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ mSong.title }}</td>
+                <td>{{ mSong.albumName }}</td>
+                <td>{{ mSong.overallScore }}</td>
+                <td><a class="nav-link active" href="{% url 'applausable:show_song' mSong.slug %}">Learn More</a> </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+                No songs found.
+            {% endif %}
+        </tbody>
+    
     {% else %}
     <h1>No artist found</h1>
     {% endif %}
@@ -54,14 +63,12 @@
 
 <div class='container'>
     <p id="test"></p>
-    
-    <h2 align="center"> Albums: </h2>
+    <h2 align="center"> Top Reviewed Songs: </h2>
     
     <div class="img-with-text"></div>
     <table width="150" border="0" cellpadding="5" align="center">
         <tr>
             {% for album in albums %}
-    
             <td align="center">
                 <a href="{% url 'applausable:show_album' album.slug %}">
     
