@@ -21,10 +21,10 @@
 -->
 
 <div class='jumbotron jumbotron-fluid'>
-	
+
 	<div class='container p-4'>
 		<h1 class="jumbotron-heading px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center ">
-			Search Applausable For You Favorite Artists
+			Search Applausable For Your Favorite Artists
 		</h1>
 		<form action="{% url 'applausable:search_results' %}" method="GET" value="{{request.GET.q}}">
 			<input type="text" name="q" value="{{request.GET.q}}" placeholder="Search Artists" />	
