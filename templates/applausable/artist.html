@@ -3,47 +3,40 @@
 
 {% block title_block %}
     Artistpage
+    
 {% endblock %}
 
 {% block body_block %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'css/general.css' %}">
 <div class="jumbotron p-4"> 
     <div class="container"> 
-        <h1 class="jumbotron-heading">Top Rated Artists:</h1> 
+        <h1 class="jumbotron-heading">All Artists:</h1> 
     </div>
 </div>
 <div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card mb-6">
-                <div class="card-body">
-                    {% if artists %}
-                    <ul class="nav flex-column">
-                        {% for artist in artists %}
-                        <li class="nav-item">
-                            {{ artist.artistName }}
-                        </li>
-                        <ul>
-                            {% if albums %}
-                            {% for album in albums %}
-                            {% ifequal artist.artistName album.artistID.artistName %}
-                            <li class="nav-item">
-                                {{ album.albumName }}
-                            </li>
-                            {% endifequal %}
-                            {% endfor %}
-                            {% endif %}
-                        </ul>
-                        {% endfor %}
-                    </ul>
-                    {% else %}
-                        <strong>There are no rated artists.</strong>
-                    {% endif %}    
-                </div>
-            </div>
+    <div class='container' algin='center'>
+        <div class="img-with-text">
+            <table width="500" border="0" cellpadding="5" align="center">
+                <tr>
+                    {% for artist in artists %}
+                    <td align="center">
+                        <a href="{% url 'applausable:show_artist' artist.slug %}">
+                            <div class="card">
+                                <img src="{{ MEDIA_URL }}{{ artist.artistImage }}" width="200" height="200" alt="artist profile image">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ artist.artistName }}</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </td>
+                    {% if not forloop.last and forloop.counter|divisibleby:3 %}
+                </tr>
+                <tr>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+            </table>
         </div>
     </div>
-</div>
 {% endblock %}

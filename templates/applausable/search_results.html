@@ -3,18 +3,19 @@
 
 {% block title_block %}
     Search Results
+
 {% endblock %}
 
 {% block body_block %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/general.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/general.css' %}">
 <div class="jumbotron">
     <div class='container'>
-        {% for result in results %}
-            <h1>Search Results for {{ result.artistName }}</h1>
-        {% endfor %}
+            <h1 align="center">Search Results</h1>
+        
     </div>
 </div>
 
+{% if results %}
 <div class='container' algin='center'>
     <div class="img-with-text">
         <table width="500" border="0" cellpadding="5" align="center">
@@ -39,4 +40,7 @@
         </table>
     </div>
 </div>
+{% else %}
+There are no results for your search
+{% endif %}
 {% endblock %}

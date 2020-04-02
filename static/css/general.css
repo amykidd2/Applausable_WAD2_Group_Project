@@ -2,18 +2,23 @@
     padding: 20px;
     text-align: center;
 }
-h1 {
-    text-align : "center";
+h1.jumbotron-heading {
+    text-align: center;
 }
 p.overallscore{
     color: black;
     font-family:'High Tower Text';
     font-size: x-large;
 }
+
 img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+
+}
+h2 {
+    text-align: center;
 }
 .img-with-text {
 
