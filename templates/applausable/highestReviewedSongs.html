@@ -16,14 +16,32 @@ Homepage
 
 
 <div class="container">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Song</th>
+      <th scope="col">Artist</th>
+      <th scope="col">Score</th>
+      <th scope="col">Link</th>
+    </tr>
+  </thead>
+  <tbody>
     {% if songs %}
-            {% for song in songs %}
-            <a class="nav-link active" href="{% url 'applausable:show_song' song.slug %}">
-                {{ song.title }}</a> with a score of {{song.overallScore}}
-            {% endfor %}
-    {% else %}
-    No songs availble
-    {% endif %}
+    {% for song in songs %}
+    <tr>
+        <th scope="row">1</th>
+        <td>{{ song.title }}</td>
+        <td>{{ song.artistName }}</td>
+        <td>{{ song.overallScore }}</td>
+        <td><a class="nav-link active" href="{% url 'applausable:show_song' song.slug %}">Learn More</a> </td>
+    </tr>
+    {% endfor %}
+{% else %}
+No songs availble
+{% endif %}
+  </tbody>
+</table>
 </div>
 
 {% endblock %}
