@@ -31,9 +31,9 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = '^7j=2vk@varrl(c0w6*&96k$@wqf5jkkiwx82sa_b)q_s4h6*q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['EuanW.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7
