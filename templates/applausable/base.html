@@ -24,11 +24,15 @@
                 <a class="navbar-brand" href="{% url 'home' %}">Applausable</a>
               </div>
               <ul class="nav navbar-nav">
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'applausable:show_user' %}"style="color:#ffffff;"><span class="glyphicon glyphicon-user"></span>Profile </a><a href="{% url 'auth_logout' %}?next={% url 'home' %}"style="color:#ffffff;"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
-                {% else %}
-                    <li><a href="{% url 'registration_register' %}"style="color:#ffffff;"><span class="glyphicon glyphicon-user"></span>Sign Up </a> <a href="{% url 'auth_login' %}"style="color:#ffffff;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>     
-                {% endif %}
+                  {% if user.is_authenticated %}
+                  {% if not request.user.is_superuser %}
+                  <li><a href="{% url 'applausable:show_user' %}" style="color:#ffffff;"><span class="glyphicon glyphicon-user"></span>Profile </a><a href="{% url 'auth_logout' %}?next={% url 'home' %}" style="color:#ffffff;"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
+                  {% else %}
+                  <li><a href="{% url 'auth_logout' %}?next={% url 'home' %}" style="color:#ffffff;"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
+                  {% endif %}
+                  {% else %}
+                  <li><a href="{% url 'registration_register' %}" style="color:#ffffff;"><span class="glyphicon glyphicon-user"></span>Sign Up </a> <a href="{% url 'auth_login' %}" style="color:#ffffff;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                  {% endif %}
               </ul>
             </div>
 		</nav>
