@@ -27,6 +27,15 @@
             </a>
         </td>
         <td>
+            <a class="photo" id="photo" href="{% url 'applausable:show_genre' 'Pop' %}">
+
+                <img src="{% static 'genre_images/bhn.jpg' %}"
+                     width="150"
+                     height="150" alt="Pop Image" />
+
+            </a>
+        </td>
+        <td>
             <a href="{% url 'applausable:show_genre' 'Rock' %}">
 
                 <img src="{% static 'genre_images/Rock.png' %}"
