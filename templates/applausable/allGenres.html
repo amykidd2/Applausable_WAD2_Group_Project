@@ -14,12 +14,13 @@
     </div>
 </div>
 
+
 <table cellpadding="25" align="center">
     <tr>
         <td>
             <a class="photo" id="photo" href="{% url 'applausable:show_genre' 'Pop' %}">
 
-                <img src="{{ MEDIA_URL }}genre_images/Pop.png"
+                <img src="{% static 'genre_images/Pop.png' %}"
                      width="150"
                      height="150" alt="Pop Image" />
 
@@ -28,7 +29,7 @@
         <td>
             <a href="{% url 'applausable:show_genre' 'Rock' %}">
 
-                <img src="{{ MEDIA_URL }}genre_images/Rock.png"
+                <img src="{% static 'genre_images/Rock.png' %}"
                      width="150"
                      height="150" alt="Rock Image" />
 
@@ -37,7 +38,7 @@
         <td>
             <a href="{% url 'applausable:show_genre' 'Soul' %}">
 
-                <img src="{{ MEDIA_URL }}genre_images/Soul.png"
+                <img src="{% static 'genre_images/Soul.png' %}"
                      width="150"
                      height="150" alt="Soul Image" />
 
@@ -46,7 +47,7 @@
         <td>
             <a href="{% url 'applausable:show_genre' 'Jazz' %}">
 
-                <img src="{{ MEDIA_URL }}genre_images/Jazz.png"
+                <img src="{% static 'genre_images/Jazz.png' %}"
                      width="150"
                      height="150" alt="Jazz Image" />
 
@@ -57,7 +58,7 @@
         <td>
             <a href="{% url 'applausable:show_genre' 'Classical' %}">
 
-                <img src="{{ MEDIA_URL }}genre_images/Classical.png"
+                <img src="{% static 'genre_images/Classical.png' %}"
                      width="150"
                      height="150" alt="Classical Image" />
 
@@ -66,7 +67,7 @@
         <td>
             <a href="{% url 'applausable:show_genre' 'Country' %}">
 
-                <img src="{{ MEDIA_URL }}genre_images/Country.png"
+                <img src="{% static 'genre_images/Country.png' %}"
                      width="150"
                      height="150" alt="Country Image" />
 
@@ -75,7 +76,7 @@
         <td>
             <a href="{% url 'applausable:show_genre' 'Indy' %}">
 
-                <img src="{{ MEDIA_URL }}genre_images/Indy.png"
+                <img src="{% static 'genre_images/Indy.png' %}"
                      width="150"
                      height="150" alt="Indy Image" />
 
@@ -84,7 +85,7 @@
         <td>
             <a href="{% url 'applausable:show_genre' 'R&B' %}">
 
-                <img src="{{ MEDIA_URL }}genre_images/R&B.png"
+                <img src="{% static 'genre_images/R&B.png' %}"
                      width="150"
                      height="150" alt="R&B Image" />
 
@@ -95,7 +96,7 @@
         <td>
             <a href="{% url 'applausable:show_genre' 'Metal' %}">
 
-                <img src="{{ MEDIA_URL }}genre_images/Metal.png"
+                <img src="{% static 'genre_images/Metal.png' %}"
                      width="150"
                      height="150" alt="Metal Image" />
 
@@ -104,7 +105,7 @@
         <td>
             <a href="{% url 'applausable:show_genre' 'Reggae' %}">
 
-                <img src="{{ MEDIA_URL }}genre_images/Reggae.png"
+                <img src="{% static 'genre_images/Reggae.png' %}"
                      width="150"
                      height="150" alt="Reggae Image" />
 
@@ -113,7 +114,7 @@
         <td>
             <a href="{% url 'applausable:show_genre' 'Hip-Hop' %}">
 
-                <img src="{{ MEDIA_URL }}genre_images/Hip-Hop.png"
+                <img src="{% static 'genre_images/Hip-Hop.png' %}"
                      width="150"
                      height="150" alt="Hip-Hop Image" />
 
@@ -122,7 +123,7 @@
         <td>
             <a href="{% url 'applausable:show_genre' 'Electronic' %}">
 
-                <img src="{{ MEDIA_URL }}genre_images/Electronic.png"
+                <img src="{% static 'genre_images/Electronic.png' %}"
                      width="150"
                      height="150" alt="Electronic Image" />
 
